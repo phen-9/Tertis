@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include "board.hpp"
 #include <math.h>
 
 using sf::Vector2f;
@@ -7,34 +8,33 @@ using sf::Time;
 
 int main()
 {
-    auto window = sf::RenderWindow(sf::VideoMode({1920u, 1080u}), "CMake SFML Project");
+    sf::RenderWindow window = sf::RenderWindow(sf::VideoMode({1920u, 1080u}), "CMake SFML Project");
     window.setFramerateLimit(144);
 
     Clock time;
     Time prevTime;
     time.start();
+    Vector2f midpoint;
+    midpoint.x = (double)window.getSize().x / 2;
+    midpoint.y = (double)window.getSize().y / 2;
+    Board board = *new Board(midpoint);
 
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
-
-    while (window.isOpen())
-    {
+    while (window.isOpen()) {
         Time delta = time.getElapsedTime() - prevTime;
         while (const std::optional event = window.pollEvent())
         {
             if (event->is<sf::Event::Closed>())
             {
                 window.close();
-            }
-        }
-        
-        //wiggle circle x position on a sin wave based on time
-        double x = 8 * sin(time.getElapsedTime().asMilliseconds() * 0.01);
-        Vector2f pos(x, shape.getPosition().y);
-        shape.setPosition(pos);
 
-        window.clear();
-        window.draw(shape);
-        window.display();
+            }
+
+
+            window.clear();
+            board.draw(window);
+
+            window.display();
+        }
+
     }
 }
