@@ -8,7 +8,7 @@ Cell::Cell(Vector2f newPosition) {
 	placed = false;
 	color = *new Color();
 	position = newPosition;
-	texture.loadFromFile("assets/block.png");
+	texture.loadFromFile("../../../../assets/block.png");
 	
 }
 

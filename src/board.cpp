@@ -3,7 +3,7 @@
 Board::Board(Vector2f position) {
 	origin = position;
 
-	bgTexture.loadFromFile("assets/bg.png");
+	bgTexture.loadFromFile("../../../../assets/bg.png");
 
 	for (int x = 0; x < 10; x++) {
 		for (int y = 0; y < 20; y++) {
