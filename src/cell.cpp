@@ -4,7 +4,7 @@
 //implement cell class
 
 Cell::Cell(Vector2f newPosition) {
-	isOccupied = false;
+	occupied = false;
 	color = *new Color();
 	position = newPosition;
 	texture.loadFromFile("assets/block.png");
@@ -17,6 +17,14 @@ void Cell::setColor(Color newColor) {
 
 void Cell::setPosition(Vector2f newPos) {
 	position = newPos;
+}
+
+void Cell::setOccupied(bool isOccupied) {
+	occupied = isOccupied;
+}
+
+bool Cell::isOccupied() {
+	return occupied;
 }
 
 void Cell::draw(sf::RenderWindow &window) {

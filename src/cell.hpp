@@ -18,8 +18,11 @@ public:
 	void setColor(Color newColor);
 	void setPosition(Vector2f newPos);
 
+	void setOccupied(bool isOccupied);
+	bool isOccupied();
+
 private:
-	bool isOccupied;
+	bool occupied;
 	Color color;
 	Vector2f position;
 	Texture texture;
