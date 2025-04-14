@@ -26,4 +26,5 @@ private:
 	Color color;
 	Vector2f position;
 	Texture texture;
+	bool placed;
 };

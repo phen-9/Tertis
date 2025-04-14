@@ -5,6 +5,7 @@
 
 Cell::Cell(Vector2f newPosition) {
 	occupied = false;
+	placed = false;
 	color = *new Color();
 	position = newPosition;
 	texture.loadFromFile("assets/block.png");
