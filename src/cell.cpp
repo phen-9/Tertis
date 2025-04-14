@@ -28,6 +28,11 @@ bool Cell::isOccupied() {
 	return occupied;
 }
 
+bool Cell::isPlaced()
+{
+	return placed;
+}
+
 void Cell::draw(sf::RenderWindow &window) {
 	sf::RectangleShape test;
 	Sprite sprite = *new Sprite(texture);

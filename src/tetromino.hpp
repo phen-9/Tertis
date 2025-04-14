@@ -7,7 +7,7 @@ using sf::Vector2i;
 class Tetromino {
 public:
 	Tetromino(Vector2i center = { 5, 20 });
-	Tetromino(Tetromino& ref);
+	Tetromino(const Tetromino& ref);
 	~Tetromino();
 
 	Vector2i getCenter();
@@ -17,6 +17,8 @@ public:
 	Vector2i* getPositions();
 
 	void rotate();
+
+	bool isOccupying(Vector2i target);
 protected:
 	Vector2i center;
 	Vector2i* arr;

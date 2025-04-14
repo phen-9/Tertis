@@ -20,6 +20,7 @@ public:
 
 	void setOccupied(bool isOccupied);
 	bool isOccupied();
+	bool isPlaced();
 
 private:
 	bool occupied;
