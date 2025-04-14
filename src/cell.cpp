@@ -5,6 +5,7 @@
 
 Cell::Cell(Vector2f newPosition) {
 	occupied = false;
+	placed = false;
 	color = *new Color();
 	position = newPosition;
 	texture.loadFromFile("assets/block.png");
@@ -25,6 +26,11 @@ void Cell::setOccupied(bool isOccupied) {
 
 bool Cell::isOccupied() {
 	return occupied;
+}
+
+bool Cell::isPlaced()
+{
+	return placed;
 }
 
 void Cell::draw(sf::RenderWindow &window) {

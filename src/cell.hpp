@@ -20,10 +20,12 @@ public:
 
 	void setOccupied(bool isOccupied);
 	bool isOccupied();
+	bool isPlaced();
 
 private:
 	bool occupied;
 	Color color;
 	Vector2f position;
 	Texture texture;
+	bool placed;
 };
