@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-#include "board.hpp"
+#include "graphicshandler.hpp"
 #include <math.h>
 
 using sf::Vector2f;
@@ -18,6 +18,7 @@ int main()
     midpoint.x = (double)window.getSize().x / 2;
     midpoint.y = (double)window.getSize().y / 2;
     Board board = *new Board(midpoint);
+    GraphicsHandler graphics(window);
 
     while (window.isOpen()) {
         Time delta = time.getElapsedTime() - prevTime;
@@ -31,7 +32,7 @@ int main()
 
 
             window.clear();
-            board.draw(window);
+            //graphics.renderBoard(board);
 
             window.display();
         }
