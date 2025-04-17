@@ -16,7 +16,7 @@ public:
 
 	Vector2i* getPositions();
 
-	void rotate();
+	virtual void rotate();
 
 	bool isOccupying(Vector2i target);
 protected:
