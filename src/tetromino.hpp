@@ -16,11 +16,12 @@ public:
 
 	Vector2i* getPositions();
 
-	void rotate();
+	virtual void rotate();
 
 	bool isOccupying(Vector2i target);
 protected:
 	Vector2i center;
 	Vector2i* arr;
 	Color col;
+	int orientation; // int 0 - 3 that determines the current rotation of the block
 };

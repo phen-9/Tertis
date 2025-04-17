@@ -5,6 +5,7 @@ Tetromino::Tetromino(Vector2i center)
 	this->center = center;
 	arr = new Vector2i[3];
 	col = sf::Color{ 130, 130, 130 };
+	this->orientation = 0;
 }
 
 Tetromino::Tetromino(const Tetromino& ref)
@@ -15,6 +16,7 @@ Tetromino::Tetromino(const Tetromino& ref)
 		arr[i] = ref.arr[i];
 	}
 	col = ref.col;
+	orientation = ref.orientation;
 }
 
 Tetromino::~Tetromino()
