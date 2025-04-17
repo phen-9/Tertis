@@ -23,4 +23,5 @@ protected:
 	Vector2i center;
 	Vector2i* arr;
 	Color col;
+	int orientation; // int 0 - 3 that determines the current rotation of the block
 };
