@@ -24,15 +24,24 @@ int main()
     Time prevTime;
     Time delta;
     Time tickRate = sf::seconds(1.0f);
+<<<<<<< HEAD
     Tetromino current = SquareBlock();
     current.setPosition({ 5, 19 });
+=======
+    Tetromino* current = new TBlock();
+    current->rotate();
+    current->setPosition({ 5, 19 });
+
+    sf::Keyboard::Scan pastKeyPress = sf::Keyboard::Scan::F1;
+    sf::Keyboard::Scan pastRotation = sf::Keyboard::Scan::F1;
+>>>>>>> 49ede2af74a1647b9230e02d9e0438c01a9b9dec
 
     int ticksOnGround = 0;
   
     while (window.isOpen()) {
         delta = time.getElapsedTime() - prevTime;
         
-        board->setCurrent(&current);
+        board->setCurrent(current);
 
         if (delta >= tickRate) {
             queue.getBlock();
@@ -54,12 +63,71 @@ int main()
             window.display();
         }
         
+        // MOVEMENT HANDLER
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Left))
+        {
+            if (pastKeyPress != sf::Keyboard::Scan::Left) {
+                pastKeyPress = sf::Keyboard::Scan::Left;
+                board->moveBlock({ -1, 0 });
+                board->update();
+                window.clear();
+                board->draw(window);
+                window.display();
+            }
+        }
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Right))
+        {
+            if (pastKeyPress != sf::Keyboard::Scan::Right) {
+                pastKeyPress = sf::Keyboard::Scan::Right;
+                board->moveBlock({ 1, 0 });
+                board->update();
+                window.clear();
+                board->draw(window);
+                window.display();
+            }
+        }
+        else if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Left)) {
+            pastKeyPress = sf::Keyboard::Scan::F1;
+        }
+        else if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Right)) {
+            pastKeyPress = sf::Keyboard::Scan::F1;
+        }
+
+        // ROTATION HANDLER
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Z))
+        {
+            if (pastRotation != sf::Keyboard::Scan::Z) {
+                pastRotation = sf::Keyboard::Scan::Z;
+                board->rotateBlock(true);
+                board->update();
+                window.clear();
+                board->draw(window);
+                window.display();
+            }
+        }
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::X))
+        {
+            if (pastRotation != sf::Keyboard::Scan::X) {
+                pastRotation = sf::Keyboard::Scan::X;
+                board->rotateBlock(false);
+                board->update();
+                window.clear();
+                board->draw(window);
+                window.display();
+            }
+        }
+        else if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Z)) {
+            pastRotation = sf::Keyboard::Scan::F1;
+        }
+        else if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::X)) {
+            pastRotation = sf::Keyboard::Scan::F1;
+        }
+
         while (const std::optional event = window.pollEvent())
         {
             if (event->is<sf::Event::Closed>())
             {
                 window.close();
-
             }
         }
     }

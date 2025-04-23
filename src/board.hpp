@@ -16,6 +16,8 @@ public:
 
 	bool moveBlock(Vector2i vec);
 
+	bool rotateBlock(bool direction);
+
 	void placeBlock();
 
 	void update();

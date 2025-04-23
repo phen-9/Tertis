@@ -35,8 +35,6 @@ LineBlock::LineBlock() {
 
 void LineBlock::rotate()
 {
-	if (orientation < 3) { orientation++; }
-	else { orientation = 0; }
 	if (orientation % 2 == 0) {
 		// Vertical
 		arr[0] = { 0, 1 };
@@ -67,8 +65,6 @@ LBlock::LBlock() {
 
 void LBlock::rotate()
 {
-	if (orientation < 3) { orientation++; }
-	else { orientation = 0; }
 	switch (orientation) {
 	case 0:
 		//  *

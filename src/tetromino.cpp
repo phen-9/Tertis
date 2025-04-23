@@ -1,4 +1,5 @@
 #include "tetromino.hpp"
+#include <iostream>
 
 Tetromino::Tetromino(Vector2i center)
 {
@@ -46,7 +47,19 @@ Color Tetromino::getColor()
 
 void Tetromino::rotate()
 {
+	
+}
 
+void Tetromino::orientationRight()
+{
+	if (orientation > 0) { orientation--; }
+	else { orientation = 3; }
+}
+
+void Tetromino::orientationLeft()
+{
+	if (orientation < 3) { orientation++; }
+	else { orientation = 0; }
 }
 
 bool Tetromino::isOccupying(Vector2i target)

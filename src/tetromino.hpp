@@ -18,6 +18,8 @@ public:
 	Color getColor();
 
 	virtual void rotate();
+	void orientationRight();
+	void orientationLeft();
 
 	bool isOccupying(Vector2i target);
 protected:
