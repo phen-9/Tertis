@@ -19,7 +19,7 @@ public:
 
 	bool moveBlock(Vector2i vec);
 
-	bool rotateBlock(bool direction);
+	bool rotateBlock(int direction);
 
 	void placeBlock();
 

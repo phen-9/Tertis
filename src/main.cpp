@@ -1,9 +1,11 @@
+
 #include <SFML/Graphics.hpp>
 #include "board.hpp"
 #include <math.h>
 #include <iostream>
 #include "blocks.hpp"
 #include "blockqueue.hpp"
+#include "inputhandler.hpp"
 
 using sf::Vector2f;
 using sf::Clock;
@@ -13,7 +15,6 @@ int main()
 {
     sf::RenderWindow window = sf::RenderWindow(sf::VideoMode({1920u, 1080u}), "CMake SFML Project");
     window.setFramerateLimit(144);
-    BlockQueue queue;
 
     Clock time;
     time.start();
@@ -23,7 +24,9 @@ int main()
     Board* board = new Board(midpoint);
     Time prevTime;
     Time delta;
-    Time tickRate = sf::seconds(.5f);
+    Time tickRate = sf::seconds(1.0f);
+    InputHandler input(time);
+    BlockQueue queue;
     Tetromino* current = new TBlock();
     current->setPosition({ 5, 19 });
 
@@ -60,64 +63,33 @@ int main()
         }
         
         // MOVEMENT HANDLER
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Left))
-        {
-            if (pastKeyPress != sf::Keyboard::Scan::Left) {
-                pastKeyPress = sf::Keyboard::Scan::Left;
-                board->moveBlock({ -1, 0 });
-                board->update();
-                window.clear();
-                board->draw(window);
-                window.display();
-            }
+        if (input.canMoveX()) {
+            board->moveBlock({ input.getArrowInput().x, 0 });
+            board->update();
+            window.clear();
+            board->draw(window);
+            window.display();
         }
-        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Right))
-        {
-            if (pastKeyPress != sf::Keyboard::Scan::Right) {
-                pastKeyPress = sf::Keyboard::Scan::Right;
-                board->moveBlock({ 1, 0 });
-                board->update();
-                window.clear();
-                board->draw(window);
-                window.display();
-            }
-        }
-        else if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Left)) {
-            pastKeyPress = sf::Keyboard::Scan::F1;
-        }
-        else if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Right)) {
-            pastKeyPress = sf::Keyboard::Scan::F1;
+        if (input.canMoveY()) {
+            board->moveBlock({ 0, input.getArrowInput().y });
+            board->update();
+            window.clear();
+            board->draw(window);
+            window.display();
         }
 
+
         // ROTATION HANDLER
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Z))
-        {
-            if (pastRotation != sf::Keyboard::Scan::Z) {
-                pastRotation = sf::Keyboard::Scan::Z;
-                board->rotateBlock(true);
-                board->update();
-                window.clear();
-                board->draw(window);
-                window.display();
-            }
+        if (input.canRotate()) {
+            board->rotateBlock(input.getRotate());
+            board->update();
+            window.clear();
+            board->draw(window);
+            window.display();
         }
-        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::X))
-        {
-            if (pastRotation != sf::Keyboard::Scan::X) {
-                pastRotation = sf::Keyboard::Scan::X;
-                board->rotateBlock(false);
-                board->update();
-                window.clear();
-                board->draw(window);
-                window.display();
-            }
-        }
-        else if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Z)) {
-            pastRotation = sf::Keyboard::Scan::F1;
-        }
-        else if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::X)) {
-            pastRotation = sf::Keyboard::Scan::F1;
-        }
+        
+
+        input.updateLastVals();
 
         while (const std::optional event = window.pollEvent())
         {
