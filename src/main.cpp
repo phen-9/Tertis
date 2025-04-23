@@ -25,7 +25,6 @@ int main()
     Time delta;
     Time tickRate = sf::seconds(1.0f);
     Tetromino* current = new TBlock();
-    current->rotate();
     current->setPosition({ 5, 19 });
 
     sf::Keyboard::Scan pastKeyPress = sf::Keyboard::Scan::F1;
