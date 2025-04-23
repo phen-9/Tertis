@@ -1,5 +1,7 @@
 #include "scoring.hpp"
 
+using std::to_string;
+
 Scoring::Scoring()
 {
 	highScore = 0;
@@ -21,7 +23,7 @@ Scoring::Scoring()
 	}
 }
 
-Scoring::Scoring(Scoring& ref)
+Scoring::Scoring(const Scoring& ref)
 {
 	this->currentScore = ref.currentScore;
 	this->highScore = ref.highScore;
@@ -59,4 +61,23 @@ int Scoring::getHighScore()
 void Scoring::resetScore()
 {
 	currentScore = 0;
+}
+
+void Scoring::draw(sf::RenderWindow& window)
+{
+	sf::Font f("../../../../assets/ComicSansMS.ttf");
+	sf::Text text(f);
+
+	std::string str = "Current Score: ";
+	str += to_string(currentScore) + "\n\nHigh Score: " + to_string(highScore);
+
+	text.setString(str);
+
+	text.setCharacterSize(50);
+
+	text.setFillColor(sf::Color::White);
+
+	text.setPosition({ 200, 400 });
+
+	window.draw(text);
 }
