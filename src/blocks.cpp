@@ -18,6 +18,11 @@ void SquareBlock::rotate()
 	// Do nothing because squares cant rotate lol
 }
 
+SquareBlock* SquareBlock::clone()
+{
+	return new SquareBlock(*this);
+}
+
 // LINE FUNCTIONS
 //  *
 //  *
@@ -47,6 +52,11 @@ void LineBlock::rotate()
 		arr[1] = { -1, 0 };
 		arr[2] = { -2, 0 };
 	}
+}
+
+LineBlock* LineBlock::clone()
+{
+	return new LineBlock(*this);;
 }
 
 // L FUNCTIONS
@@ -101,6 +111,11 @@ void LBlock::rotate()
 	}
 }
 
+LBlock* LBlock::clone()
+{
+	return new LBlock(*this);;
+}
+
 // J FUNCTIONS
 //  *
 //  *
@@ -151,6 +166,11 @@ void JBlock::rotate()
 		arr[2] = { 1, 0 };
 		break;
 	}
+}
+
+JBlock* JBlock::clone()
+{
+	return new JBlock(*this);;
 }
 
 // T FUNCTIONS
@@ -204,6 +224,11 @@ void TBlock::rotate()
 	}
 }
 
+TBlock* TBlock::clone()
+{
+	return new TBlock(*this);;
+}
+
 // S FUNCTIONS
 //  **
 // **
@@ -237,6 +262,11 @@ void SBlock::rotate()
 	}
 }
 
+SBlock* SBlock::clone()
+{
+	return new SBlock(*this);;
+}
+
 // Z FUNCTIONS
 //  **
 //   **
@@ -268,4 +298,9 @@ void ZBlock::rotate()
 		arr[1] = { 1, 0 };
 		arr[2] = { 0, -1 };
 	}
+}
+
+ZBlock* ZBlock::clone()
+{
+	return new ZBlock(*this);;
 }

@@ -25,6 +25,11 @@ Tetromino::~Tetromino()
 	delete[] arr;
 }
 
+Tetromino* Tetromino::clone()
+{
+	return new Tetromino(*this);
+}
+
 Vector2i Tetromino::getCenter()
 {
 	return center;
