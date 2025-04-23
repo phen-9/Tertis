@@ -16,12 +16,7 @@ Board::Board(Vector2f position) :
 		for (int y = 0; y < 20; y++) {
 			cells[x][y] = Cell({ 0,0 }, cellTexture);
 			Vector2f cellPosition;
-			if (y <= 5 && x <= 8){
-				cells[x][y].setPlaced(true);
-			}
-			else {
-				cells[x][y].setOccupied(false);
-			}
+			cells[x][y].setOccupied(false);
 			cells[x][y].setColor(Color(130, 130, 130));
 			cellPosition.x = origin.x + (CELL_SIZE * x) - (5*CELL_SIZE);
 			cellPosition.y = origin.y + (CELL_SIZE * (19 - y)) - (10*CELL_SIZE);
@@ -38,8 +33,6 @@ Board::~Board()
 	}
 	delete current;
 }
-
-
 
 void Board::setCurrent(Tetromino* newBlock)
 {
@@ -125,6 +118,7 @@ void Board::update(RenderWindow &window)
 			}
 		}
 	}
+	score.draw(window);
 	window.display();
 }
 
@@ -163,6 +157,28 @@ void Board::lineClearCheck()
 					cells[x][y].setPlaced(false);
 				}
 			}
+		}
+
+		if (arr.size() == 1) {
+			// score + 150
+			score.updateScore(150);
+		}
+		else if (arr.size() == 2) {
+			// score + 450
+			score.updateScore(450);
+		}
+		else if (arr.size() == 3) {
+			// score + 1000
+			score.updateScore(1000);
+		}
+		else if (arr.size() == 4) {
+			// score + 4000
+			score.updateScore(4000);
+		}
+		else {
+			// impossible
+			// score + 999,999,999
+			score.updateScore(999999999);
 		}
 	}
 }

@@ -2,6 +2,7 @@
 #include "cell.hpp"
 #include "tetromino.hpp"
 #include "blockqueue.hpp"
+#include "scoring.hpp"
 #include <Vector>
 #include <iostream>
 
@@ -28,6 +29,7 @@ public:
 private:
 	bool isValid(Vector2i& pos);
 
+	Scoring score;
 	Cell cells[10][20];
 	Vector2f origin;
 	Tetromino* current;
