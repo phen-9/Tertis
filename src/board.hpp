@@ -1,6 +1,9 @@
 #pragma once
 #include "cell.hpp"
 #include "tetromino.hpp"
+#include "blockqueue.hpp"
+#include <Vector>
+#include <iostream>
 
 using sf::RenderWindow;
 
@@ -21,6 +24,8 @@ public:
 	void placeBlock();
 
 	void update();
+
+	void lineClearCheck();
 
 private:
 	bool isValid(Vector2i& pos);

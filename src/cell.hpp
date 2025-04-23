@@ -18,6 +18,8 @@ public:
 	void draw(sf::RenderWindow &window);
 
 	void setColor(Color newColor);
+	Color getColor();
+
 	void setPosition(Vector2f newPos);
 
 	Sprite getSprite();
