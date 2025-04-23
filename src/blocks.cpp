@@ -1,4 +1,5 @@
 #include "blocks.hpp"
+#include <iostream>
 
 // SQUARE FUNCTIONS
 //  **
@@ -35,8 +36,6 @@ LineBlock::LineBlock() {
 
 void LineBlock::rotate()
 {
-	if (orientation < 3) { orientation++; }
-	else { orientation = 0; }
 	if (orientation % 2 == 0) {
 		// Vertical
 		arr[0] = { 0, 1 };
@@ -67,8 +66,6 @@ LBlock::LBlock() {
 
 void LBlock::rotate()
 {
-	if (orientation < 3) { orientation++; }
-	else { orientation = 0; }
 	switch (orientation) {
 	case 0:
 		//  *
@@ -121,8 +118,6 @@ JBlock::JBlock() {
 
 void JBlock::rotate()
 {
-	if (orientation < 3) { orientation++; }
-	else { orientation = 0; }
 	switch (orientation) {
 	case 0:
 		//  *
@@ -174,8 +169,6 @@ TBlock::TBlock() {
 
 void TBlock::rotate()
 {
-	if (orientation < 3) { orientation++; }
-	else { orientation = 0; }
 	switch (orientation) {
 	case 0:
 		//   *
@@ -205,8 +198,8 @@ void TBlock::rotate()
 		//  *
 		// **
 		//  *
-		arr[0] = { 0, -1 };
-		arr[1] = { 1, 0 };
+		arr[0] = { 0, 1 };
+		arr[1] = { -1, 0 };
 		arr[2] = { 0, -1 };
 		break;
 	}
@@ -227,8 +220,6 @@ SBlock::SBlock() {
 
 void SBlock::rotate()
 {
-	if (orientation < 3) { orientation++; }
-	else { orientation = 0; }
 	if (orientation % 2 == 0) {
 		//
 		//  **
@@ -262,8 +253,6 @@ ZBlock::ZBlock() {
 
 void ZBlock::rotate()
 {
-	if (orientation < 3) { orientation++; }
-	else { orientation = 0; }
 	if (orientation % 2 == 0) {
 		//
 		// **
