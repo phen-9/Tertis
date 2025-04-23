@@ -22,13 +22,17 @@ int main()
     Time prevTime;
     Time delta;
     Time tickRate = sf::seconds(1.0f);
-    Tetromino current = SquareBlock();
+    Tetromino current = TBlock();
+    current.setPosition({ 6,6 });
   
     while (window.isOpen()) {
         delta = time.getElapsedTime() - prevTime;
         std::cout << delta.asSeconds() << std::endl;
+        
+        board->setCurrent(current);
 
         if (delta >= tickRate) {
+            board->update();
             prevTime = time.getElapsedTime();
             window.clear();
             board->draw(window);

@@ -12,6 +12,10 @@ public:
 
 	void draw(RenderWindow &window);
 
+	void setCurrent(Tetromino& newBlock);
+
+	void moveBlock(Vector2i& vec);
+
 	void update();
 
 private:

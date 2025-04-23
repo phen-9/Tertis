@@ -36,6 +36,11 @@ bool Cell::isOccupied() {
 	return occupied;
 }
 
+void Cell::setPlaced(bool isPlaced)
+{
+	placed = isPlaced;
+}
+
 bool Cell::isPlaced()
 {
 	return placed;

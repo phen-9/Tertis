@@ -39,6 +39,11 @@ Vector2i* Tetromino::getPositions()
 	return arr;
 }
 
+Color Tetromino::getColor()
+{
+	return this->col;
+}
+
 void Tetromino::rotate()
 {
 

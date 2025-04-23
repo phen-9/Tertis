@@ -24,6 +24,7 @@ public:
 
 	void setOccupied(bool isOccupied);
 	bool isOccupied();
+	void setPlaced(bool isPlaced);
 	bool isPlaced();
 
 private:
