@@ -66,7 +66,6 @@ bool Board::moveBlock(Vector2i vec)
 	Vector2i center = current->getCenter() + vec;
 	Vector2i* positions = current->getPositions();
 	if (isValid(center) && isValid(center + positions[0]) && isValid(center + positions[1]) && isValid(center + positions[2])) {
-		std::cout << isValid(center) << ", " << isValid(center + positions[0]) << ", " << isValid(center + positions[1]) << ", " << isValid(center + positions[2]) << std::endl;
 		current->setPosition(center);
 		return true;
 	}
