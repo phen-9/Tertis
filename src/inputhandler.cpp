@@ -88,9 +88,9 @@ bool InputHandler::canQuickDrop() {
 	return q && lastQuickDrop != q;
 }
 bool InputHandler::canHold() {
+	bool q = getQuickDrop();
 
-
-	return false;
+	return q && lastQuickDrop != q;
 }
 
 bool InputHandler::getQuickDrop() {

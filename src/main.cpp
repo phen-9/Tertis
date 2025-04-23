@@ -65,9 +65,16 @@ int main()
             board->update(window);
             board->placeBlock();
         }
+
+        //HOLD BLOCK
+        if (input.canHold()) {
+            board->update(window);
+        }
         
         // MOVEMENT HANDLER
         if (input.canMoveX()) {
+            board->holdBlock();
+
             board->moveBlock({ input.getArrowInput().x, 0 });
             board->update(window);
         }
@@ -76,6 +83,7 @@ int main()
             board->update(window);
  
         }
+
 
 
         // ROTATION HANDLER

@@ -100,10 +100,24 @@ void Board::placeBlock()
 	setCurrent(queue.getBlock());
 }
 
+void Board::holdBlock() {
+	if (hold.getBlock() == nullptr) {
+		hold.setBlock(current);
+		setCurrent(queue.getBlock());
+	}
+	else {
+		Tetromino* temp = current->clone();
+		current = hold.getBlock()->clone();
+		hold.setBlock(temp);
+		current->setPosition({ 5,20 });
+	}
+}
+
 void Board::update(RenderWindow &window)
 {
 	window.clear();
 	sprite.setPosition({ origin.x - (5 * CELL_SIZE) , origin.y - (10 * CELL_SIZE) });
+	hold.draw(window);
 	queue.draw(window);
 	window.draw(sprite);
 	for (int x = 0; x < 10; x++) {

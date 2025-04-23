@@ -4,20 +4,24 @@
 #include <random>
 
 
-BlockQueue::BlockQueue() : tex("../../../../assets/next.png"), sprite(tex)
+BlockQueue::BlockQueue() : tex("../../../../assets/next_bg.png"), sprite(tex),
+blockTex("../../../../assets/blank.png"), blockSprite(blockTex)
 {
 	for (int i = 0; i < 7; i++) {
 		blockUsed[i] = false;
 	}
-	sprite.setOrigin({100.0, 100.0});
+	sprite.setOrigin({ 100.0, 100.0 });
+	blockSprite.setOrigin({ 100.0, 100.0 });
 	next = nullptr;
 	blocksUsed = 0;
 	setNext();
 }
 
 void BlockQueue::draw(sf::RenderWindow& window) {
-	sprite.setPosition({ 1200.0, 200.0});
+	sprite.setPosition({ 1250.0, 200.0});
+	blockSprite.setPosition(sprite.getPosition());
 	window.draw(sprite);
+	window.draw(blockSprite);
 
 }
 
@@ -37,29 +41,29 @@ void BlockQueue::updateTexture(int id) {
 	std::string filepath;
 	switch (id) {
 	case 0:
-		filepath = "../../../../assets/next_square.png";
+		filepath = "../../../../assets/square.png";
 		break;
 	case 1:
-		filepath = "../../../../assets/next_line.png";
+		filepath = "../../../../assets/line.png";
 		break;
 	case 2:
-		filepath = "../../../../assets/next_l.png";
+		filepath = "../../../../assets/l.png";
 		break;
 	case 3:
-		filepath = "../../../../assets/next_j.png";
+		filepath = "../../../../assets/j.png";
 		break;
 	case 4:
-		filepath = "../../../../assets/next_t.png";
+		filepath = "../../../../assets/t.png";
 		break;
 	case 5:
-		filepath = "../../../../assets/next_s.png";
+		filepath = "../../../../assets/s.png";
 		break;
 	case 6:
-		filepath = "../../../../assets/next_z.png";
+		filepath = "../../../../assets/z.png";
 		break;
 	}
-	tex.loadFromFile(filepath);
-	sprite.setTexture(tex);
+	blockTex.loadFromFile(filepath);
+	blockSprite.setTexture(blockTex);
 }
 
 void BlockQueue::setNext() {

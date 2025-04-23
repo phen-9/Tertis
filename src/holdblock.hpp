@@ -1,24 +1,23 @@
-
 #pragma once
 #include "blocks.hpp"
 
-
-class BlockQueue {
+class Holdblock {
 public:
-	BlockQueue();
-	Tetromino* getBlock();
+	Holdblock();
+	Tetromino* swap();
 
-	void draw(sf::RenderWindow &window);
-	
+	void draw(sf::RenderWindow& window);
+	Tetromino* getBlock();
+	void setBlock(Tetromino* newBlock);
+
+
 private:
 	void updateTexture(int id);
-	void setNext();
-	bool blockUsed[7];
-	int blocksUsed;
-	Tetromino *next;
 
+	Tetromino* block;
 	Texture tex;
 	Sprite sprite;
+
 	Texture blockTex;
 	Sprite blockSprite;
 };

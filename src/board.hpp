@@ -2,6 +2,7 @@
 #include "cell.hpp"
 #include "tetromino.hpp"
 #include "blockqueue.hpp"
+#include "holdblock.hpp"
 #include <Vector>
 #include <iostream>
 
@@ -21,6 +22,8 @@ public:
 
 	void placeBlock();
 
+	void holdBlock();
+
 	void update(RenderWindow &window);
 
 	void lineClearCheck();
@@ -35,4 +38,5 @@ private:
 	Texture cellTexture;
 	Sprite sprite;
 	BlockQueue queue;
+	Holdblock hold;
 };
