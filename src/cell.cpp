@@ -3,13 +3,17 @@
 
 //implement cell class
 
-Cell::Cell(Vector2f newPosition) :
-	texture("../../../../assets/block.png"),
-	sprite(texture) {
+Cell::Cell(Vector2f newPosition, Texture& tex) :
+	sprite(tex) {
 	occupied = false;
 	placed = false;
-	color = *new Color();
+	color = Color();
 	position = newPosition;
+}
+
+Cell::~Cell()
+{
+	// Delete anything?
 }
 
 Sprite Cell::getSprite() {

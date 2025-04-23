@@ -8,6 +8,8 @@ class Board {
 public:
 	Board(Vector2f position = {0.0,0.0});
 
+	~Board();
+
 	void draw(RenderWindow &window);
 
 	void update();
@@ -17,5 +19,6 @@ private:
 	Vector2f origin;
 	Tetromino current;
 	Texture texture;
+	Texture cellTexture;
 	Sprite sprite;
 };
