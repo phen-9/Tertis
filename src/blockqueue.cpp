@@ -16,7 +16,7 @@ BlockQueue::BlockQueue() : tex("../../../../assets/next.png"), sprite(tex)
 }
 
 void BlockQueue::draw(sf::RenderWindow& window) {
-	sprite.setPosition({ 1200.0, 200.0});
+	sprite.setPosition({ 1250.0, 300.0});
 	window.draw(sprite);
 
 }

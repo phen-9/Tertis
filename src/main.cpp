@@ -23,7 +23,7 @@ int main()
     Board* board = new Board(midpoint);
     Time prevTime;
     Time delta;
-    Time tickRate = sf::seconds(1.0f);
+    Time tickRate = sf::seconds(0.5f);
     Tetromino* current = new TBlock();
     current->rotate();
     current->setPosition({ 5, 19 });
@@ -39,7 +39,6 @@ int main()
         board->setCurrent(current);
 
         if (delta >= tickRate) {
-            queue.getBlock();
             if (board->moveBlock({ 0, -1 })) {
                 // Not on ground
                 ticksOnGround = 0;
@@ -48,6 +47,10 @@ int main()
                 ticksOnGround++;
                 if (ticksOnGround >= 4) {
                     board->placeBlock();
+                    current = queue.getBlock();
+                    current->setPosition({ 5, 19 });
+
+                    ticksOnGround = 0;
                 }
             }
             board->update();
@@ -66,6 +69,7 @@ int main()
                 board->moveBlock({ -1, 0 });
                 board->update();
                 window.clear();
+                queue.draw(window);
                 board->draw(window);
                 window.display();
             }
@@ -77,6 +81,7 @@ int main()
                 board->moveBlock({ 1, 0 });
                 board->update();
                 window.clear();
+                queue.draw(window);
                 board->draw(window);
                 window.display();
             }
@@ -96,6 +101,7 @@ int main()
                 board->rotateBlock(true);
                 board->update();
                 window.clear();
+                queue.draw(window);
                 board->draw(window);
                 window.display();
             }
@@ -107,6 +113,7 @@ int main()
                 board->rotateBlock(false);
                 board->update();
                 window.clear();
+                queue.draw(window);
                 board->draw(window);
                 window.display();
             }

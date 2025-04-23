@@ -24,7 +24,6 @@ public:
 
 private:
 	bool isValid(Vector2i& pos);
-
 	Cell cells[10][20];
 	Vector2f origin;
 	Tetromino* current;
