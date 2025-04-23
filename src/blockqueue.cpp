@@ -24,12 +24,6 @@ void BlockQueue::draw(sf::RenderWindow& window) {
 Tetromino* BlockQueue::getBlock() {
 	Tetromino* current = next;
 	setNext();
-	for (int i = 0; i < 7; i++) {
-		if (blockUsed[i]) {
-			std::cout << i << ", ";
-		}
-	}
-	std::cout << "\n";
 	if (blocksUsed == 7) {
 		for (int i = 0; i < 7; i++) {
 			blockUsed[i] = false;

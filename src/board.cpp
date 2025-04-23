@@ -16,7 +16,7 @@ Board::Board(Vector2f position) :
 		for (int y = 0; y < 20; y++) {
 			cells[x][y] = Cell({ 0,0 }, cellTexture);
 			Vector2f cellPosition;
-			if (y <= 5){
+			if (y <= 5 && x <= 8){
 				cells[x][y].setPlaced(true);
 			}
 			else {
@@ -66,6 +66,7 @@ bool Board::moveBlock(Vector2i vec)
 	Vector2i center = current->getCenter() + vec;
 	Vector2i* positions = current->getPositions();
 	if (isValid(center) && isValid(center + positions[0]) && isValid(center + positions[1]) && isValid(center + positions[2])) {
+		std::cout << isValid(center) << ", " << isValid(center + positions[0]) << ", " << isValid(center + positions[1]) << ", " << isValid(center + positions[2]) << std::endl;
 		current->setPosition(center);
 		return true;
 	}
@@ -103,9 +104,12 @@ void Board::placeBlock()
 	Vector2i center = current->getCenter();
 	Vector2i* positions = current->getPositions();
 	cells[center.x][center.y].setPlaced(true);
+	cells[center.x][center.y].setOccupied(false);
 	for (int i = 0; i < 3; i++) {
 		cells[center.x + positions[i].x][center.y + positions[i].y].setPlaced(true);
+		cells[center.x + positions[i].x][center.y + positions[i].y].setOccupied(false);
 	}
+	lineClearCheck();
 }
 
 void Board::update()
@@ -129,15 +133,58 @@ void Board::update()
 	}
 }
 
+void Board::lineClearCheck()
+{
+	std::vector<int> arr;
+	for (int y = 0; y < 20; y++) {
+		bool full = true;
+		for (int x = 0; x < 10; x++) {
+			if (!cells[x][y].isPlaced()) {
+				full = false;
+			}
+		}
+		if (full) {
+			arr.push_back(y);
+			for (int x = 0; x < 10; x++) {
+				cells[x][y].setPlaced(false);
+				cells[x][y].setOccupied(false);
+			}
+		}
+	}
+	if (arr.size() > 0) {
+		// Move all lines down
+		int y = 0;
+		for (int temp : arr) {
+			if (temp > y) {
+				y = temp; // Find the top line cleared
+			}
+		}
+		for (; y < 20; y++) {
+			// Check only lines above the cleared ones
+			for (int x = 0; x < 10; x++) {
+				if (cells[x][y].isPlaced()) {
+					cells[x][y - arr.size()].setPlaced(true);
+					cells[x][y - arr.size()].setColor(cells[x][y].getColor());
+					cells[x][y].setPlaced(false);
+				}
+			}
+		}
+	}
+}
+
 bool Board::isValid(Vector2i& pos)
 {
-	// Placed
-	if (cells[pos.x][pos.y].isPlaced()) {
+	// OOB
+	if (pos.x < 0 || pos.x > 9 || pos.y < 0) {
 		return false;
 	}
 
-	// OOB
-	if (pos.x < 0 || pos.x > 9 || pos.y < 0) {
+	if (pos.y > 19) {
+		return true;
+	}
+
+	// Placed
+	if (cells[pos.x][pos.y].isPlaced()) {
 		return false;
 	}
 	return true;

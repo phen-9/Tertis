@@ -244,9 +244,9 @@ ZBlock::ZBlock() {
 	this->center = { 5, 20 };
 	orientation = 0;
 	arr = new Vector2i[3];
-	arr[0] = { -1, 1 };
+	arr[0] = { -1, 0 };
 	arr[1] = { 0, -1 };
-	arr[2] = { 1, 0 };
+	arr[2] = { 1, -1 };
 	col = sf::Color{ 255, 31, 31 };
 }
 
@@ -256,9 +256,9 @@ void ZBlock::rotate()
 		//
 		// **
 		//  **
-		arr[0] = { -1, 1 };
+		arr[0] = { -1, 0 };
 		arr[1] = { 0, -1 };
-		arr[2] = { 1, 0 };
+		arr[2] = { 1, -1 };
 	}
 	else {
 		//   *

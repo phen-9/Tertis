@@ -24,6 +24,11 @@ void Cell::setColor(Color newColor) {
 	color = newColor;
 }
 
+Color Cell::getColor()
+{
+	return this->color;
+}
+
 void Cell::setPosition(Vector2f newPos) {
 	position = newPos;
 }

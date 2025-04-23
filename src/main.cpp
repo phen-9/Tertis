@@ -41,7 +41,6 @@ int main()
         board->setCurrent(current);
 
         if (delta >= tickRate) {
-            queue.getBlock();
             if (board->moveBlock({ 0, -1 })) {
                 // Not on ground
                 ticksOnGround = 0;
@@ -50,6 +49,9 @@ int main()
                 ticksOnGround++;
                 if (ticksOnGround >= 4) {
                     board->placeBlock();
+                    current = queue.getBlock();
+                    board->setCurrent(current);
+                    ticksOnGround = 0;
                 }
             }
             board->update();
