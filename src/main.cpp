@@ -3,6 +3,7 @@
 #include <math.h>
 #include <iostream>
 #include "blocks.hpp"
+#include "blockqueue.hpp"
 
 using sf::Vector2f;
 using sf::Clock;
@@ -12,6 +13,7 @@ int main()
 {
     sf::RenderWindow window = sf::RenderWindow(sf::VideoMode({1920u, 1080u}), "CMake SFML Project");
     window.setFramerateLimit(144);
+    BlockQueue queue;
 
     Clock time;
     time.start();
@@ -37,6 +39,7 @@ int main()
         board->setCurrent(current);
 
         if (delta >= tickRate) {
+            queue.getBlock();
             if (board->moveBlock({ 0, -1 })) {
                 // Not on ground
                 ticksOnGround = 0;
@@ -50,6 +53,7 @@ int main()
             board->update();
             prevTime = time.getElapsedTime();
             window.clear();
+            queue.draw(window);
             board->draw(window);
             window.display();
         }

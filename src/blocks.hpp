@@ -1,3 +1,5 @@
+
+#pragma once
 #include "tetromino.hpp"
 
 class SquareBlock : public Tetromino {
