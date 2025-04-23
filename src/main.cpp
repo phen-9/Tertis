@@ -25,6 +25,8 @@ int main()
     Tetromino current = TBlock();
     current.setPosition({ 5, 19 });
 
+    sf::Keyboard::Scan pastKeyPress = sf::Keyboard::Scan::F1;;
+
     int ticksOnGround = 0;
   
     while (window.isOpen()) {
@@ -50,12 +52,41 @@ int main()
             window.display();
         }
         
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Left))
+        {
+            if (pastKeyPress != sf::Keyboard::Scan::Left) {
+                pastKeyPress = sf::Keyboard::Scan::Left;
+                board->moveBlock({ -1, 0 });
+                board->update();
+                window.clear();
+                board->draw(window);
+                window.display();
+            }
+        }
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Right))
+        {
+            if (pastKeyPress != sf::Keyboard::Scan::Right) {
+                pastKeyPress = sf::Keyboard::Scan::Right;
+                board->moveBlock({ 1, 0 });
+                board->update();
+                window.clear();
+                board->draw(window);
+                window.display();
+            }
+        }
+        else if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Left)) {
+            pastKeyPress = sf::Keyboard::Scan::F1;
+        }
+        else if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Right)) {
+            pastKeyPress = sf::Keyboard::Scan::F1;
+        }
+
+
         while (const std::optional event = window.pollEvent())
         {
             if (event->is<sf::Event::Closed>())
             {
                 window.close();
-
             }
         }
     }
