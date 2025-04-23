@@ -92,8 +92,8 @@ void BlockQueue::setNext() {
 		newBlock = new TBlock();
 		break;
 	case 5:
-		break;
 		newBlock = new SBlock();
+		break;
 	case 6:
 		newBlock = new ZBlock();
 		break;
