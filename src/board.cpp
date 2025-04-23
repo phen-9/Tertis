@@ -6,6 +6,7 @@ Board::Board(Vector2f position) :
 	texture("../../../../assets/bg.png"),
 	cellTexture("../../../../assets/block.png"),
 	sprite(texture){
+	current = new Tetromino();
 
 	srand(time(0));
 
@@ -34,6 +35,7 @@ Board::~Board()
 	for (int x = 0; x < 10; x++) {
 		delete[] cells[x];
 	}
+	delete current;
 }
 
 void Board::draw(RenderWindow& window) {
@@ -68,6 +70,31 @@ bool Board::moveBlock(Vector2i vec)
 		return true;
 	}
 	// else delete system32
+	return false;
+}
+
+bool Board::rotateBlock(bool direction)
+{
+	Tetromino temp = *current;
+	if (direction) {
+		temp.orientationLeft();
+	}
+	else {
+		temp.orientationRight();
+	}
+	temp.rotate();
+	Vector2i center = temp.getCenter();
+	Vector2i* positions = temp.getPositions();
+	if (isValid(center) && isValid(center + positions[0]) && isValid(center + positions[1]) && isValid(center + positions[2])) {
+		if (direction) {
+			current->orientationLeft();
+		}
+		else {
+			current->orientationRight();
+		}
+		current->rotate();
+		return true;
+	}
 	return false;
 }
 
