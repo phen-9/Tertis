@@ -15,6 +15,7 @@ public:
 private:
 	Cell cells[10][20];
 	Vector2f origin;
-	Texture bgTexture;
 	Tetromino current;
+	Texture texture;
+	Sprite sprite;
 };

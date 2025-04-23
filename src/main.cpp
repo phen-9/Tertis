@@ -18,6 +18,7 @@ int main()
     midpoint.x = (double)window.getSize().x / 2;
     midpoint.y = (double)window.getSize().y / 2;
     Board board = *new Board(midpoint);
+  
 
     while (window.isOpen()) {
         Time delta = time.getElapsedTime() - prevTime;

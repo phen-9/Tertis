@@ -3,13 +3,17 @@
 
 //implement cell class
 
-Cell::Cell(Vector2f newPosition) {
+Cell::Cell(Vector2f newPosition) :
+	texture("../../../../assets/block.png"),
+	sprite(texture) {
 	occupied = false;
 	placed = false;
 	color = *new Color();
 	position = newPosition;
-	texture.loadFromFile("../../../../assets/block.png");
-	
+}
+
+Sprite Cell::getSprite() {
+	return sprite;
 }
 
 void Cell::setColor(Color newColor) {
@@ -34,9 +38,6 @@ bool Cell::isPlaced()
 }
 
 void Cell::draw(sf::RenderWindow &window) {
-	sf::RectangleShape test;
-	Sprite sprite = *new Sprite(texture);
-
 	sprite.setColor(color);
 	sprite.setPosition(position);
 	window.draw(sprite);
