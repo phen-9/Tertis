@@ -73,10 +73,10 @@ bool Board::moveBlock(Vector2i vec)
 	return false;
 }
 
-bool Board::rotateBlock(bool direction)
+bool Board::rotateBlock(int direction)
 {
 	Tetromino temp = *current;
-	if (direction) {
+	if (direction == -1) {
 		temp.orientationLeft();
 	}
 	else {
