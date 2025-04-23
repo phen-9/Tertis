@@ -12,7 +12,9 @@ using sf::Texture;
 
 class Cell {
 public:
-	Cell(Vector2f newPosition = Vector2f(0, 0));
+	Cell(Vector2f newPosition = Vector2f(0, 0), Texture& tex = Texture());
+	~Cell();
+
 	void draw(sf::RenderWindow &window);
 
 	void setColor(Color newColor);
@@ -22,6 +24,7 @@ public:
 
 	void setOccupied(bool isOccupied);
 	bool isOccupied();
+	void setPlaced(bool isPlaced);
 	bool isPlaced();
 
 private:
@@ -29,6 +32,5 @@ private:
 	Color color;
 	Vector2f position;
 	bool placed;
-	Texture texture;
 	Sprite sprite;
 };

@@ -15,6 +15,7 @@ public:
 	void setPosition(Vector2i newPos);
 
 	Vector2i* getPositions();
+	Color getColor();
 
 	virtual void rotate();
 
