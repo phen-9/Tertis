@@ -24,17 +24,12 @@ int main()
     Time prevTime;
     Time delta;
     Time tickRate = sf::seconds(1.0f);
-<<<<<<< HEAD
-    Tetromino current = SquareBlock();
-    current.setPosition({ 5, 19 });
-=======
     Tetromino* current = new TBlock();
     current->rotate();
     current->setPosition({ 5, 19 });
 
     sf::Keyboard::Scan pastKeyPress = sf::Keyboard::Scan::F1;
     sf::Keyboard::Scan pastRotation = sf::Keyboard::Scan::F1;
->>>>>>> 49ede2af74a1647b9230e02d9e0438c01a9b9dec
 
     int ticksOnGround = 0;
   
