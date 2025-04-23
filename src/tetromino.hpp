@@ -10,6 +10,8 @@ public:
 	Tetromino(const Tetromino& ref);
 	~Tetromino();
 
+	virtual Tetromino* clone();
+
 	Vector2i getCenter();
 
 	void setPosition(Vector2i newPos);

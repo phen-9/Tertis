@@ -60,26 +60,28 @@ bool Board::moveBlock(Vector2i vec)
 
 bool Board::rotateBlock(int direction)
 {
-	Tetromino temp = *current;
+	Tetromino* temp = current->clone();
 	if (direction == -1) {
-		temp.orientationLeft();
+		temp->orientationLeft();
 	}
 	else {
-		temp.orientationRight();
+		temp->orientationRight();
 	}
-	temp.rotate();
-	Vector2i center = temp.getCenter();
-	Vector2i* positions = temp.getPositions();
+	temp->rotate();
+	Vector2i center = temp->getCenter();
+	Vector2i* positions = temp->getPositions();
 	if (isValid(center) && isValid(center + positions[0]) && isValid(center + positions[1]) && isValid(center + positions[2])) {
-		if (direction) {
+		if (direction == -1) {
 			current->orientationLeft();
 		}
 		else {
 			current->orientationRight();
 		}
 		current->rotate();
+		delete temp;
 		return true;
 	}
+	delete temp;
 	return false;
 }
 
