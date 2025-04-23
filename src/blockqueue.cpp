@@ -77,10 +77,10 @@ void BlockQueue::setNext() {
 	}
 	switch (r) {
 	case 0:
-		newBlock = new LineBlock();
+		newBlock = new SquareBlock();
 		break;
 	case 1:
-		newBlock = new SquareBlock();
+		newBlock = new LineBlock();
 		break;
 	case 2:
 		newBlock = new LBlock();

@@ -26,9 +26,6 @@ int main()
     Time delta;
     Time tickRate = sf::seconds(1.0f);
     InputHandler input(time);
-    Tetromino* current = new TBlock();
-    BlockQueue queue;
-    current->setPosition({ 5, 19 });
 
     int ticksOnGround = 0;
   
@@ -45,8 +42,6 @@ int main()
 
         delta = time.getElapsedTime() - prevTime;
         
-        board->setCurrent(current);
-
         if (delta >= tickRate) {
             if (board->moveBlock({ 0, -1 })) {
                 // Not on ground
@@ -54,11 +49,9 @@ int main()
             }
             else {
                 ticksOnGround++;
-                if (ticksOnGround >= 4) {
+                if (ticksOnGround >= 2) {
                     board->update(window);
                     board->placeBlock();
-                    current = queue.getBlock();
-                    board->setCurrent(current);
                     ticksOnGround = 0;
                 }
             }
@@ -71,8 +64,6 @@ int main()
             while (board->moveBlock({ 0,-1 }));
             board->update(window);
             board->placeBlock();
-            current = queue.getBlock();
-            board->setCurrent(current);
         }
         
         // MOVEMENT HANDLER

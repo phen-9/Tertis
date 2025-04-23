@@ -6,7 +6,7 @@ Board::Board(Vector2f position) :
 	texture("../../../../assets/bg.png"),
 	cellTexture("../../../../assets/block.png"),
 	sprite(texture){
-	current = new Tetromino();
+	current = queue.getBlock();
 
 	srand(time(0));
 
@@ -96,12 +96,15 @@ void Board::placeBlock()
 		cells[center.x + positions[i].x][center.y + positions[i].y].setOccupied(false);
 	}
 	lineClearCheck();
+	delete current;
+	setCurrent(queue.getBlock());
 }
 
 void Board::update(RenderWindow &window)
 {
 	window.clear();
 	sprite.setPosition({ origin.x - (5 * CELL_SIZE) , origin.y - (10 * CELL_SIZE) });
+	queue.draw(window);
 	window.draw(sprite);
 	for (int x = 0; x < 10; x++) {
 		for (int y = 0; y < 20; y++) {
@@ -125,24 +128,6 @@ void Board::update(RenderWindow &window)
 	window.display();
 }
 
-/*
-void Board::draw(RenderWindow& window) {
-	
-	for (int x = 0; x < 10; x++) {
-		for (int y = 0; y < 20; y++) {
-			Cell cell = cells[x][y];
-			if (cell.isOccupied()) {
-				cell.setColor(current->getColor());
-				cell.draw(window);
-			}
-			else if (cell.isPlaced()) {
-				cell.setColor(sf::Color{ 130, 130, 130 });
-				cell.draw(window);
-			}
-		}
-	}
-}
-*/
 void Board::lineClearCheck()
 {
 	std::vector<int> arr;

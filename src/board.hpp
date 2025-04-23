@@ -34,4 +34,5 @@ private:
 	Texture texture;
 	Texture cellTexture;
 	Sprite sprite;
+	BlockQueue queue;
 };
