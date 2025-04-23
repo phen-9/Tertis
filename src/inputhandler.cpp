@@ -1,11 +1,14 @@
 
 #include "inputhandler.hpp"
+#include <iostream>
+using std::cout;
 
 InputHandler::InputHandler(Clock &newTime) {
 	time = newTime;
 	lastArrowInput = { 0,0 };
 	lastRotate = 0;
 	lastHold = false;
+	lastQuickDrop = false;
 }
 
 Vector2i InputHandler::getArrowInput() {
@@ -64,14 +67,8 @@ bool InputHandler::canMoveY() {
 }
 
 bool InputHandler::canRotate() {
-	int r = 0;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Z)) {
-		r--;
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::X)) {
-		r++;
-	}
-	return r == 0 && lastRotate != getRotate();
+	int r = getRotate();
+	return r != 0 && lastRotate != r;
 }
 
 int InputHandler::getRotate() {
@@ -85,16 +82,28 @@ int InputHandler::getRotate() {
 	return r;
 }
 
+bool InputHandler::canQuickDrop() {
+	bool q = getQuickDrop();
+
+	return q && lastQuickDrop != q;
+}
+bool InputHandler::canHold() {
+
+
+	return false;
+}
+
+bool InputHandler::getQuickDrop() {
+	return sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Up);
+}
+
 bool InputHandler::getHold() {
-	bool h = false;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Left)) {
-		h = true;
-	}
-	return h;
+	return sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Left);
 }
 
 void InputHandler::updateLastVals() {
 	lastArrowInput = getArrowInput();
 	lastHold = getHold();
 	lastRotate = getRotate();
+	lastQuickDrop = getQuickDrop();
 }

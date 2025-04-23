@@ -22,6 +22,7 @@ Board::Board(Vector2f position) :
 			else {
 				cells[x][y].setOccupied(false);
 			}
+			cells[x][y].setColor(Color(130, 130, 130));
 			cellPosition.x = origin.x + (CELL_SIZE * x) - (5*CELL_SIZE);
 			cellPosition.y = origin.y + (CELL_SIZE * (19 - y)) - (10*CELL_SIZE);
 			cells[x][y].setPosition(cellPosition);
@@ -38,23 +39,7 @@ Board::~Board()
 	delete current;
 }
 
-void Board::draw(RenderWindow& window) {
-	sprite.setPosition({ origin.x - (5 * CELL_SIZE) , origin.y - (10 * CELL_SIZE) });
-	window.draw(sprite);
-	for (int x = 0; x < 10; x++) {
-		for (int y = 0; y < 20; y++) {
-			Cell cell = cells[x][y];
-			if (cell.isOccupied() && !cell.isPlaced()) {
-				cell.setColor(current->getColor());
-				cell.draw(window);
-			}
-			else if (cell.isPlaced()) {
-				cell.setColor(sf::Color{ 130, 130, 130 });
-				cell.draw(window);
-			}
-		}
-	}
-}
+
 
 void Board::setCurrent(Tetromino* newBlock)
 {
@@ -66,7 +51,6 @@ bool Board::moveBlock(Vector2i vec)
 	Vector2i center = current->getCenter() + vec;
 	Vector2i* positions = current->getPositions();
 	if (isValid(center) && isValid(center + positions[0]) && isValid(center + positions[1]) && isValid(center + positions[2])) {
-		std::cout << isValid(center) << ", " << isValid(center + positions[0]) << ", " << isValid(center + positions[1]) << ", " << isValid(center + positions[2]) << std::endl;
 		current->setPosition(center);
 		return true;
 	}
@@ -112,8 +96,11 @@ void Board::placeBlock()
 	lineClearCheck();
 }
 
-void Board::update()
+void Board::update(RenderWindow &window)
 {
+	window.clear();
+	sprite.setPosition({ origin.x - (5 * CELL_SIZE) , origin.y - (10 * CELL_SIZE) });
+	window.draw(sprite);
 	for (int x = 0; x < 10; x++) {
 		for (int y = 0; y < 20; y++) {
 			Cell* cell = &cells[x][y];
@@ -121,18 +108,39 @@ void Board::update()
 				// Check if cell is in the current tetromino
 				if (current->isOccupying({ x, y })) {
 					cell->setOccupied(true);
+					cell->setColor(current->getColor());
+					cell->draw(window);
 				}
 				else {
 					cell->setOccupied(false);
 				}
 			}
 			else {
-				cell->setOccupied(true);
+				cell->draw(window);
+			}
+		}
+	}
+	window.display();
+}
+
+/*
+void Board::draw(RenderWindow& window) {
+	
+	for (int x = 0; x < 10; x++) {
+		for (int y = 0; y < 20; y++) {
+			Cell cell = cells[x][y];
+			if (cell.isOccupied()) {
+				cell.setColor(current->getColor());
+				cell.draw(window);
+			}
+			else if (cell.isPlaced()) {
+				cell.setColor(sf::Color{ 130, 130, 130 });
+				cell.draw(window);
 			}
 		}
 	}
 }
-
+*/
 void Board::lineClearCheck()
 {
 	std::vector<int> arr;

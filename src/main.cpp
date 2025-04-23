@@ -26,16 +26,23 @@ int main()
     Time delta;
     Time tickRate = sf::seconds(1.0f);
     InputHandler input(time);
-    BlockQueue queue;
     Tetromino* current = new TBlock();
+    BlockQueue queue;
     current->setPosition({ 5, 19 });
-
-    sf::Keyboard::Scan pastKeyPress = sf::Keyboard::Scan::F1;
-    sf::Keyboard::Scan pastRotation = sf::Keyboard::Scan::F1;
 
     int ticksOnGround = 0;
   
     while (window.isOpen()) {
+
+
+        while (const std::optional event = window.pollEvent())
+        {
+            if (event->is<sf::Event::Closed>())
+            {
+                window.close();
+            }
+        }
+
         delta = time.getElapsedTime() - prevTime;
         
         board->setCurrent(current);
@@ -48,56 +55,48 @@ int main()
             else {
                 ticksOnGround++;
                 if (ticksOnGround >= 4) {
+                    board->update(window);
                     board->placeBlock();
                     current = queue.getBlock();
                     board->setCurrent(current);
                     ticksOnGround = 0;
                 }
             }
-            board->update();
+            board->update(window);
             prevTime = time.getElapsedTime();
-            window.clear();
-            queue.draw(window);
-            board->draw(window);
-            window.display();
+        }
+
+        //QUICKDROP
+        if (input.canQuickDrop()) {
+            while (board->moveBlock({ 0,-1 }));
+            board->update(window);
+            board->placeBlock();
+            current = queue.getBlock();
+            board->setCurrent(current);
         }
         
         // MOVEMENT HANDLER
         if (input.canMoveX()) {
             board->moveBlock({ input.getArrowInput().x, 0 });
-            board->update();
-            window.clear();
-            board->draw(window);
-            window.display();
+            board->update(window);
         }
         if (input.canMoveY()) {
             board->moveBlock({ 0, input.getArrowInput().y });
-            board->update();
-            window.clear();
-            board->draw(window);
-            window.display();
+            board->update(window);
+ 
         }
 
 
         // ROTATION HANDLER
         if (input.canRotate()) {
             board->rotateBlock(input.getRotate());
-            board->update();
-            window.clear();
-            board->draw(window);
-            window.display();
+            board->update(window);
+
         }
-        
 
         input.updateLastVals();
 
-        while (const std::optional event = window.pollEvent())
-        {
-            if (event->is<sf::Event::Closed>())
-            {
-                window.close();
-            }
-        }
+
     }
     delete board;
 }

@@ -14,8 +14,11 @@ public:
 	bool canMoveX();
 	bool canMoveY();
 	bool canRotate();
-	int getRotate();
+	bool canQuickDrop();
+	bool canHold();
+	bool getQuickDrop();
 	bool getHold();
+	int getRotate();
 	void updateLastVals();
 
 private:
@@ -25,5 +28,6 @@ private:
 	Vector2i lastArrowInput;
 	int lastRotate;
 	bool lastHold;
+	bool lastQuickDrop;
 
 };

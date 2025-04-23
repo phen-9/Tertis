@@ -13,8 +13,6 @@ public:
 
 	~Board();
 
-	void draw(RenderWindow &window);
-
 	void setCurrent(Tetromino* newBlock);
 
 	bool moveBlock(Vector2i vec);
@@ -23,7 +21,7 @@ public:
 
 	void placeBlock();
 
-	void update();
+	void update(RenderWindow &window);
 
 	void lineClearCheck();
 
