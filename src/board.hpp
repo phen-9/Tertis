@@ -12,16 +12,20 @@ public:
 
 	void draw(RenderWindow &window);
 
-	void setCurrent(Tetromino& newBlock);
+	void setCurrent(Tetromino* newBlock);
 
-	void moveBlock(Vector2i& vec);
+	bool moveBlock(Vector2i vec);
+
+	void placeBlock();
 
 	void update();
 
 private:
+	bool isValid(Vector2i& pos);
+
 	Cell cells[10][20];
 	Vector2f origin;
-	Tetromino current;
+	Tetromino* current;
 	Texture texture;
 	Texture cellTexture;
 	Sprite sprite;

@@ -43,7 +43,7 @@ void Board::draw(RenderWindow& window) {
 		for (int y = 0; y < 20; y++) {
 			Cell cell = cells[x][y];
 			if (cell.isOccupied() && !cell.isPlaced()) {
-				cell.setColor(current.getColor());
+				cell.setColor(current->getColor());
 				cell.draw(window);
 			}
 			else if (cell.isPlaced()) {
@@ -54,15 +54,31 @@ void Board::draw(RenderWindow& window) {
 	}
 }
 
-void Board::setCurrent(Tetromino& newBlock)
+void Board::setCurrent(Tetromino* newBlock)
 {
 	this->current = newBlock;
 }
 
-void Board::moveBlock(Vector2i& vec)
+bool Board::moveBlock(Vector2i vec)
 {
-	
+	Vector2i center = current->getCenter() + vec;
+	Vector2i* positions = current->getPositions();
+	if (isValid(center) && isValid(center + positions[0]) && isValid(center + positions[1]) && isValid(center + positions[2])) {
+		current->setPosition(center);
+		return true;
+	}
+	// else delete system32
+	return false;
+}
 
+void Board::placeBlock()
+{
+	Vector2i center = current->getCenter();
+	Vector2i* positions = current->getPositions();
+	cells[center.x][center.y].setPlaced(true);
+	for (int i = 0; i < 3; i++) {
+		cells[center.x + positions[i].x][center.y + positions[i].y].setPlaced(true);
+	}
 }
 
 void Board::update()
@@ -72,7 +88,7 @@ void Board::update()
 			Cell* cell = &cells[x][y];
 			if (!cell->isPlaced()) {
 				// Check if cell is in the current tetromino
-				if (current.isOccupying({ x, y })) {
+				if (current->isOccupying({ x, y })) {
 					cell->setOccupied(true);
 				}
 				else {
@@ -84,4 +100,18 @@ void Board::update()
 			}
 		}
 	}
+}
+
+bool Board::isValid(Vector2i& pos)
+{
+	// Placed
+	if (cells[pos.x][pos.y].isPlaced()) {
+		return false;
+	}
+
+	// OOB
+	if (pos.x < 0 || pos.x > 9 || pos.y < 0) {
+		return false;
+	}
+	return true;
 }

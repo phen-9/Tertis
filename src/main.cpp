@@ -23,15 +23,26 @@ int main()
     Time delta;
     Time tickRate = sf::seconds(1.0f);
     Tetromino current = TBlock();
-    current.setPosition({ 6,6 });
+    current.setPosition({ 5, 19 });
+
+    int ticksOnGround = 0;
   
     while (window.isOpen()) {
         delta = time.getElapsedTime() - prevTime;
-        std::cout << delta.asSeconds() << std::endl;
         
-        board->setCurrent(current);
+        board->setCurrent(&current);
 
         if (delta >= tickRate) {
+            if (board->moveBlock({ 0, -1 })) {
+                // Not on ground
+                ticksOnGround = 0;
+            }
+            else {
+                ticksOnGround++;
+                if (ticksOnGround >= 4) {
+                    board->placeBlock();
+                }
+            }
             board->update();
             prevTime = time.getElapsedTime();
             window.clear();
