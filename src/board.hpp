@@ -4,6 +4,7 @@
 #include "blockqueue.hpp"
 #include "scoring.hpp"
 #include "holdblock.hpp"
+#include <SFML/Audio.hpp>
 #include <Vector>
 #include <iostream>
 
@@ -44,4 +45,7 @@ private:
 	BlockQueue queue;
 	Holdblock hold;
 	bool hasSwapped;
+
+	sf::Sound* audioman;
+	sf::SoundBuffer drop;
 };
