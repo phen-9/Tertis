@@ -7,12 +7,17 @@
 #include "blockqueue.hpp"
 #include "inputhandler.hpp"
 
+#include "testcases/holdblocktest.hpp"
+
 using sf::Vector2f;
 using sf::Clock;
 using sf::Time;
 
 int main()
 {
+    HoldBlockTest test;
+    test.run();
+    return 0;
     sf::RenderWindow window = sf::RenderWindow(sf::VideoMode({1920u, 1080u}), "CMake SFML Project");
     window.setFramerateLimit(144);
 

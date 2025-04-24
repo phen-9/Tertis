@@ -27,7 +27,6 @@ Tetromino* Holdblock::getBlock() {
 void Holdblock::setBlock(Tetromino* newBlock) {
 	block = newBlock->clone();
 	updateTexture(block->getId());
-	std::cout << block->getId() << ", " << newBlock->getId() << "\n";
 }
 
 
