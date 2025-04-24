@@ -38,7 +38,13 @@ int main()
             {
                 window.close();
             }
+            else if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>())
+            {
+                if (keyPressed->scancode == sf::Keyboard::Scancode::Escape)
+                    window.close();
+            }
         }
+        tickRate = sf::seconds(1.0 / (cbrt(time.getElapsedTime().asSeconds())));
 
         delta = time.getElapsedTime() - prevTime;
         

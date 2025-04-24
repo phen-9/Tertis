@@ -57,4 +57,3 @@ void Cell::draw(sf::RenderWindow &window) {
 	window.draw(sprite);
 
 }
-

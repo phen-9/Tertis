@@ -29,9 +29,7 @@ Board::Board(Vector2f position) :
 
 Board::~Board()
 {
-	for (int x = 0; x < 10; x++) {
-		delete[] cells[x];
-	}
+
 	delete current;
 }
 
@@ -89,7 +87,9 @@ void Board::placeBlock()
 		cells[center.x + positions[i].x][center.y + positions[i].y].setPlaced(true);
 		cells[center.x + positions[i].x][center.y + positions[i].y].setOccupied(false);
 	}
+	
 	lineClearCheck();
+	checkDeath();
 	delete current;
 	setCurrent(queue.getBlock());
 	hasSwapped = false;
@@ -195,6 +195,29 @@ void Board::lineClearCheck()
 			// score + 999,999,999
 			score.updateScore(999999999);
 		}
+	}
+}
+
+void Board::checkDeath() {
+	bool isDead = current->getCenter().y >= 20;
+	
+	for (int i = 0; i < 3; i++) {
+		int y = current->getPositions()[i].y + current->getCenter().y;
+		if (y >= 20) {
+			isDead = true;
+		}
+	}
+
+	
+
+	if (isDead) {
+
+		std::cout << "DEAD\n";
+	//	for (int x = 0; x < 10; x++) {
+	//		for (int y = 0; y < 20; y++) {
+	//			
+	//		}
+	//	}
 	}
 }
 
