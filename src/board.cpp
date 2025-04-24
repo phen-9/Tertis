@@ -12,6 +12,10 @@ Board::Board(Vector2f position) :
 
 	origin = position;
 
+	this->drop = sf::SoundBuffer("../../../../assets/click.wav");
+	this->audioman = new sf::Sound(drop);
+	audioman->setVolume(75);
+
 	for (int x = 0; x < 10; x++) {
 		for (int y = 0; y < 20; y++) {
 			cells[x][y] = Cell({ 0,0 }, cellTexture);
@@ -79,6 +83,7 @@ bool Board::rotateBlock(int direction)
 
 void Board::placeBlock()
 {
+	audioman->play();
 	Vector2i center = current->getCenter();
 	Vector2i* positions = current->getPositions();
 	cells[center.x][center.y].setPlaced(true);
