@@ -2,7 +2,7 @@
 #pragma once
 #include "blocks.hpp"
 
-
+//supplies new tetromino objects to board goes through all possible tetrominos before repeating (bag system)
 class BlockQueue {
 public:
 	BlockQueue();

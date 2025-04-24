@@ -7,6 +7,7 @@
 #include <iostream>
 #include <string>
 
+//class to store current player score as well as high score (please dont just edit the txt file)
 class Scoring {
 public:
 	Scoring();

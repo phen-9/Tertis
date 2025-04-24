@@ -6,6 +6,7 @@ using sf::Texture;
 using sf::Sprite;
 using sf::Text;
 
+//class for the screen to display on player game over
 class DeathScreen {
 public:
 	DeathScreen();

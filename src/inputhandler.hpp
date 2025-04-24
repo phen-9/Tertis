@@ -7,6 +7,7 @@ using sf::Vector2i;
 using sf::Time;
 using sf::Clock;
 
+//converts keystrokes to usable input for tetromino movement
 class InputHandler {
 public:
 	InputHandler(Clock &time);

@@ -2,6 +2,7 @@
 #include <ctime>
 #include <cstdlib>
 
+//board class handles rendering blocks and moving tetrominos: 2d array of cells + queue and holdblock classes
 Board::Board(Vector2f position) :
 	texture("../../../../assets/bg.png"),
 	cellTexture("../../../../assets/block.png"),

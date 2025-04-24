@@ -1,8 +1,8 @@
 
 #include "cell.hpp"
 
-//implement cell class
 
+//single square on a board, stores the color to render, as well as if it is occupied by the current block or settled
 Cell::Cell(Vector2f newPosition, Texture& tex) :
 	sprite(tex) {
 	occupied = false;
@@ -13,7 +13,6 @@ Cell::Cell(Vector2f newPosition, Texture& tex) :
 
 Cell::~Cell()
 {
-	// Delete anything?
 }
 
 Sprite Cell::getSprite() {

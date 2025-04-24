@@ -2,6 +2,7 @@
 #pragma once
 #include "tetromino.hpp"
 
+//definitions for different tetromino blocks
 class SquareBlock : public Tetromino {
 public:
 	SquareBlock();

@@ -6,6 +6,8 @@ using sf::Texture;
 using sf::Sprite;
 using sf::Text;
 
+
+//menu displayed upon opening the game
 class MainMenu {
 public:
 	MainMenu();

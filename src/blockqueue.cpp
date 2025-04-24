@@ -3,7 +3,6 @@
 #include <iostream>
 #include <random>
 
-
 BlockQueue::BlockQueue() : tex("../../../../assets/next_bg.png"), sprite(tex),
 blockTex("../../../../assets/blank.png"), blockSprite(blockTex)
 {

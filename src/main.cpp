@@ -46,6 +46,7 @@ int main()
     InputHandler input(time);
 
     int state = 0;
+    //state 1: menu, 2: gameplay, 3: death
 
     MainMenu menu;
     DeathScreen death;
@@ -85,7 +86,7 @@ int main()
         else if(state == 1) {
             //gameplay state
 
-
+            //1 physics tick every 1 second/ the cubed root of the elapsed seconds
             tickRate = sf::seconds(1.0 / (cbrt(time.getElapsedTime().asSeconds())));
 
             delta = time.getElapsedTime() - prevTime;

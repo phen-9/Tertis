@@ -4,6 +4,7 @@
 
 using sf::Vector2i;
 
+//class definition for a single tetromino, consisting of a center coordinate on a board and 3 relative coordinates of other pieces of the block
 class Tetromino {
 public:
 	Tetromino(Vector2i center = { 5, 20 });
