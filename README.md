@@ -2,8 +2,8 @@ Tertis, a legally distinct version of Tetris
 Created by Gavin Gaetos-Puzon (Lab Section 8) and Logan Spinali (Lab Section 8)
 
 Run Instructions:
-- Run "Run Tertis" in the root directory
-- Otherwise, navigate to out/build/x64-Debug/bin/main.exe to run the program
+- Navigate to Tertis/out/build/x64-Debug/bin/main.exe to run the program
+- To access the project workspace, go into visual studio and open the Tertis folder using the option "Open a local folder"
 
 Controls:
 - Left Arrow Key: move falling block left one tile
@@ -22,3 +22,5 @@ How to play:
 	- 3 Lines = 1000 points
 	- 4 Lines = 4000 points
 - Play to have fun and beat your high score!
+
+Video Demonstration: https://youtu.be/ExTsU9p7mN4
