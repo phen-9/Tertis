@@ -1,6 +1,10 @@
 Tertis, a legally distinct version of Tetris
 Created by Gavin Gaetos-Puzon (Lab Section 8) and Logan Spinali (Lab Section 8)
 
+Run Instructions:
+- Run "Run Tertis" in the root directory
+- Otherwise, navigate to out/build/x64-Debug/bin/main.exe to run the program
+
 Controls:
 - Left Arrow Key: move falling block left one tile
 - Right Arrow Key: move falling block right one tile
