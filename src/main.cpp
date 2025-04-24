@@ -8,6 +8,8 @@
 #include "blockqueue.hpp"
 #include "inputhandler.hpp"
 
+#include "testcases/holdblocktest.hpp"
+
 using sf::Vector2f;
 using sf::Clock;
 using sf::Time;
