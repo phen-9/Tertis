@@ -31,7 +31,7 @@ int main()
     InputHandler input(time);
 
     sf::Music mus("../../../../assets/TertisTheme.ogg");
-    mus.setVolume(80);
+    mus.setVolume(60);
     mus.setLooping(true);
     mus.play();
 

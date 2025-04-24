@@ -14,7 +14,7 @@ Board::Board(Vector2f position) :
 
 	this->drop = sf::SoundBuffer("../../../../assets/click.wav");
 	this->audioman = new sf::Sound(drop);
-	audioman->setVolume(75);
+	audioman->setVolume(85);
 
 	for (int x = 0; x < 10; x++) {
 		for (int y = 0; y < 20; y++) {
