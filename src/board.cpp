@@ -181,24 +181,24 @@ void Board::lineClearCheck()
 
 		if (arr.size() == 1) {
 			// score + 150
-			score.updateScore(150);
+			score.updateScore(150, true);
 		}
 		else if (arr.size() == 2) {
 			// score + 450
-			score.updateScore(450);
+			score.updateScore(450, true);
 		}
 		else if (arr.size() == 3) {
 			// score + 1000
-			score.updateScore(1000);
+			score.updateScore(1000, true);
 		}
 		else if (arr.size() == 4) {
 			// score + 4000
-			score.updateScore(4000);
+			score.updateScore(4000, true);
 		}
 		else {
 			// impossible
 			// score + 999,999,999
-			score.updateScore(999999999);
+			score.updateScore(999999999, true);
 		}
 	}
 }

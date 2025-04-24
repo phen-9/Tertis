@@ -13,11 +13,13 @@ public:
 	Scoring(const Scoring& ref);
 	~Scoring();
 
-	int updateScore(int add);
+	int updateScore(int add, bool sound);
 
 	int getCurrentScore();
 
 	int getHighScore();
+
+	void setHighScore(int newScore);
 
 	void resetScore();
 
