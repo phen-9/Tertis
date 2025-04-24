@@ -13,7 +13,7 @@ using sf::Time;
 
 int main()
 {
-    sf::RenderWindow window = sf::RenderWindow(sf::VideoMode({1920u, 1080u}), "CMake SFML Project");
+    sf::RenderWindow window = sf::RenderWindow(sf::VideoMode({1920u, 1080u}), "Tertis");
     window.setFramerateLimit(144);
 
     Clock time;

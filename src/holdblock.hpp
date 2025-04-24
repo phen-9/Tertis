@@ -4,7 +4,7 @@
 class Holdblock {
 public:
 	Holdblock();
-	Tetromino* swap();
+	~Holdblock();
 
 	void draw(sf::RenderWindow& window);
 	Tetromino* getBlock();
