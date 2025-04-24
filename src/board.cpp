@@ -94,7 +94,6 @@ void Board::placeBlock()
 	}
 	
 	lineClearCheck();
-	checkDeath();
 	delete current;
 	setCurrent(queue.getBlock());
 	hasSwapped = false;
@@ -203,7 +202,20 @@ void Board::lineClearCheck()
 	}
 }
 
-void Board::checkDeath() {
+void Board::reset() {
+	for (int x = 0; x < 10; x++) {
+		for (int y = 0; y < 20; y++) {
+			cells[x][y].setColor(Color(130, 130, 130));
+			cells[x][y].setPlaced(false);
+			cells[x][y].setOccupied(false);
+		}
+	}
+	queue.getBlock();
+	hold.reset();
+	score.resetScore();
+}
+
+bool Board::checkDeath() {
 	bool isDead = current->getCenter().y >= 20;
 	
 	for (int i = 0; i < 3; i++) {
@@ -212,18 +224,7 @@ void Board::checkDeath() {
 			isDead = true;
 		}
 	}
-
-	
-
-	if (isDead) {
-
-		std::cout << "DEAD\n";
-	//	for (int x = 0; x < 10; x++) {
-	//		for (int y = 0; y < 20; y++) {
-	//			
-	//		}
-	//	}
-	}
+	return isDead;
 }
 
 bool Board::isValid(Vector2i& pos)

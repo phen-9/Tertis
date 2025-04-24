@@ -18,6 +18,7 @@
 #include "blockqueue.hpp"
 #include "inputhandler.hpp"
 #include "mainmenu.hpp"
+#include "deathscreen.hpp"
 
 #include "testcases/holdblocktest.hpp"
 #include "testcases/blockqueuetest.hpp"
@@ -47,6 +48,7 @@ int main()
     int state = 0;
 
     MainMenu menu;
+    DeathScreen death;
 
     sf::Music mus("../../../../assets/TertisTheme.ogg");
     mus.setVolume(60);
@@ -95,9 +97,13 @@ int main()
                 }
                 else {
                     ticksOnGround++;
-                    if (ticksOnGround >= 2) {
+                    if (ticksOnGround >= 3) {
                         board->update(window);
+                        if (board->checkDeath()) {
+                            state = 2;
+                        }
                         board->placeBlock();
+                        
                         ticksOnGround = 0;
                     }
                 }
@@ -109,7 +115,11 @@ int main()
             if (input.canQuickDrop()) {
                 while (board->moveBlock({ 0,-1 }));
                 board->update(window);
+                if (board->checkDeath()) {
+                    state = 2;
+                }
                 board->placeBlock();
+               
             }
 
             //HOLD BLOCK
@@ -142,6 +152,13 @@ int main()
         }
         else {
             //game over state
+            death.run(window);
+            
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Enter)) {
+                state = 1;
+                board->reset();
+                time.start();
+            }
         }
 
     }

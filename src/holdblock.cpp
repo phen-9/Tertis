@@ -36,10 +36,18 @@ void Holdblock::setBlock(Tetromino* newBlock) {
 	updateTexture(block->getId());
 }
 
+void Holdblock::reset() {
+	updateTexture(-1);
+	block = nullptr;
+}
+
 
 void Holdblock::updateTexture(int id) {
 	std::string filepath;
 	switch (id) {
+	default:
+		filepath = "../../../../assets/blank.png";
+		break;
 	case 0:
 		filepath = "../../../../assets/square.png";
 		break;

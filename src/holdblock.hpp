@@ -9,7 +9,7 @@ public:
 	void draw(sf::RenderWindow& window);
 	Tetromino* getBlock();
 	void setBlock(Tetromino* newBlock);
-
+	void reset();
 
 private:
 	void updateTexture(int id);

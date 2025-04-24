@@ -30,7 +30,9 @@ public:
 
 	void lineClearCheck();
 
-	void checkDeath();
+	bool checkDeath();
+
+	void reset();
 
 private:
 	bool isValid(Vector2i& pos);
