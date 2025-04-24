@@ -1,5 +1,6 @@
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "board.hpp"
 #include <math.h>
 #include <iostream>
@@ -27,10 +28,14 @@ int main()
     Time tickRate = sf::seconds(1.0f);
     InputHandler input(time);
 
+    sf::Music mus("../../../../assets/TertisTheme.ogg");
+    mus.setVolume(80);
+    mus.setLooping(true);
+    mus.play();
+
     int ticksOnGround = 0;
   
     while (window.isOpen()) {
-
 
         while (const std::optional event = window.pollEvent())
         {
