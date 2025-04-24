@@ -19,12 +19,9 @@
 #include "inputhandler.hpp"
 #include "mainmenu.hpp"
 
-<<<<<<< HEAD
-=======
 #include "testcases/holdblocktest.hpp"
 #include "testcases/blockqueuetest.hpp"
 #include "testcases/scoringtest.hpp"
->>>>>>> 798b866d2b647afb30667a70246b47944bedea57
 
 using sf::Vector2f;
 using sf::Clock;
