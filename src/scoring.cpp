@@ -9,7 +9,6 @@ Scoring::Scoring()
 	clear = sf::SoundBuffer("../../../../assets/lineclear.wav");
 	tertis = sf::SoundBuffer ("../../../../assets/tertisclear.wav");
 	audioman = new sf::Sound(clear);
-	audioman->setVolume(65);
 
 	saveData = std::fstream("../../../../src/savedata.txt", std::ios::in);
 	if (saveData.is_open()) {
@@ -57,11 +56,13 @@ int Scoring::updateScore(int add)
 	if (add >= 4000) {
 		// play tertis sound
 		audioman->setBuffer(tertis);
+		audioman->setVolume(75);
 		audioman->play();
 	}
 	else if (add >= 0) {
 		// play normal clear sound
 		audioman->setBuffer(clear);
+		audioman->setVolume(50);
 		audioman->play();
 	}
 
