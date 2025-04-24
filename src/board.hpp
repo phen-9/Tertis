@@ -29,6 +29,8 @@ public:
 
 	void lineClearCheck();
 
+	void checkDeath();
+
 private:
 	bool isValid(Vector2i& pos);
 
