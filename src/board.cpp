@@ -160,21 +160,17 @@ void Board::lineClearCheck()
 		}
 	}
 	if (arr.size() > 0) {
-		// Move all lines down
-		int y = 0;
-		for (int temp : arr) {
-			if (temp > y) {
-				y = temp; // Find the top line cleared
-			}
-		}
-		for (; y < 20; y++) {
-			// Check only lines above the cleared ones
-			for (int x = 0; x < 10; x++) {
-				if (cells[x][y].isPlaced()) {
-					cells[x][y - arr.size()].setPlaced(true);
-					cells[x][y - arr.size()].setColor(cells[x][y].getColor());
-					cells[x][y].setPlaced(false);
+		for (int temp = 0; temp < arr.size(); temp++) {
+			// For each cleared line
+			for (int y = arr.at(temp) + 1; y < 20; y++) {
+				// Move every line at and above the cleared one down
+				for (int x = 0; x < 10; x++) {
+					cells[x][y - 1].setPlaced(cells[x][y].isPlaced());
+					cells[x][y - 1].setColor(cells[x][y].getColor());
 				}
+			}
+			for (int i = 0; i < arr.size(); i++) {
+				arr[i] -= 1;
 			}
 		}
 
