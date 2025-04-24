@@ -10,6 +10,13 @@ blockTex("../../../../assets/blank.png"), blockSprite(blockTex)
 	block = nullptr;
 }
 
+Holdblock::~Holdblock()
+{
+	if (this->block != nullptr) {
+		delete block;
+	}
+}
+
 
 void Holdblock::draw(sf::RenderWindow& window) {
 	sprite.setPosition({ 670.0, 200.0 });

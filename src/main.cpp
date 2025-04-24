@@ -1,5 +1,6 @@
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "board.hpp"
 #include <math.h>
 #include <iostream>
@@ -7,18 +8,13 @@
 #include "blockqueue.hpp"
 #include "inputhandler.hpp"
 
-#include "testcases/holdblocktest.hpp"
-
 using sf::Vector2f;
 using sf::Clock;
 using sf::Time;
 
 int main()
 {
-    HoldBlockTest test;
-    test.run();
-    return 0;
-    sf::RenderWindow window = sf::RenderWindow(sf::VideoMode({1920u, 1080u}), "CMake SFML Project");
+    sf::RenderWindow window = sf::RenderWindow(sf::VideoMode({1920u, 1080u}), "Tertis");
     window.setFramerateLimit(144);
 
     Clock time;
@@ -32,10 +28,14 @@ int main()
     Time tickRate = sf::seconds(1.0f);
     InputHandler input(time);
 
+    sf::Music mus("../../../../assets/TertisTheme.ogg");
+    mus.setVolume(80);
+    mus.setLooping(true);
+    mus.play();
+
     int ticksOnGround = 0;
   
     while (window.isOpen()) {
-
 
         while (const std::optional event = window.pollEvent())
         {
