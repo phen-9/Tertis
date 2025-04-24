@@ -7,8 +7,8 @@
 #include "blocks.hpp"
 #include "blockqueue.hpp"
 #include "inputhandler.hpp"
+#include "mainmenu.hpp"
 
-#include "testcases/holdblocktest.hpp"
 
 using sf::Vector2f;
 using sf::Clock;
@@ -16,6 +16,7 @@ using sf::Time;
 
 int main()
 {
+   
     sf::RenderWindow window = sf::RenderWindow(sf::VideoMode({1920u, 1080u}), "Tertis");
     window.setFramerateLimit(144);
 
@@ -29,6 +30,10 @@ int main()
     Time delta;
     Time tickRate = sf::seconds(1.0f);
     InputHandler input(time);
+
+    int state = 0;
+
+    MainMenu menu;
 
     sf::Music mus("../../../../assets/TertisTheme.ogg");
     mus.setVolume(80);
@@ -51,62 +56,80 @@ int main()
                     window.close();
             }
         }
-        tickRate = sf::seconds(1.0 / (cbrt(time.getElapsedTime().asSeconds())));
 
-        delta = time.getElapsedTime() - prevTime;
-        
-        if (delta >= tickRate) {
-            if (board->moveBlock({ 0, -1 })) {
-                // Not on ground
-                ticksOnGround = 0;
+        if (state == 0) {
+            //menu state
+            menu.run(window);
+
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Enter)) {
+                state = 1;
+                time.start();
             }
-            else {
-                ticksOnGround++;
-                if (ticksOnGround >= 2) {
-                    board->update(window);
-                    board->placeBlock();
+
+        }
+        else if(state == 1) {
+            //gameplay state
+
+
+            tickRate = sf::seconds(1.0 / (cbrt(time.getElapsedTime().asSeconds())));
+
+            delta = time.getElapsedTime() - prevTime;
+
+            if (delta >= tickRate) {
+                if (board->moveBlock({ 0, -1 })) {
+                    // Not on ground
                     ticksOnGround = 0;
                 }
+                else {
+                    ticksOnGround++;
+                    if (ticksOnGround >= 2) {
+                        board->update(window);
+                        board->placeBlock();
+                        ticksOnGround = 0;
+                    }
+                }
+                board->update(window);
+                prevTime = time.getElapsedTime();
             }
-            board->update(window);
-            prevTime = time.getElapsedTime();
+
+            //QUICKDROP
+            if (input.canQuickDrop()) {
+                while (board->moveBlock({ 0,-1 }));
+                board->update(window);
+                board->placeBlock();
+            }
+
+            //HOLD BLOCK
+            if (input.canHold()) {
+                board->holdBlock();
+                board->update(window);
+            }
+
+            // MOVEMENT HANDLER
+            if (input.canMoveX()) {
+                board->moveBlock({ input.getArrowInput().x, 0 });
+                board->update(window);
+            }
+            if (input.canMoveY()) {
+                board->moveBlock({ 0, input.getArrowInput().y });
+                board->update(window);
+
+            }
+
+
+
+            // ROTATION HANDLER
+            if (input.canRotate()) {
+                board->rotateBlock(input.getRotate());
+                board->update(window);
+
+            }
+
+            input.updateLastVals();
         }
-
-        //QUICKDROP
-        if (input.canQuickDrop()) {
-            while (board->moveBlock({ 0,-1 }));
-            board->update(window);
-            board->placeBlock();
+        else {
+            //game over state
         }
-
-        //HOLD BLOCK
-        if (input.canHold()) {
-            board->holdBlock();
-            board->update(window);
-        }
-        
-        // MOVEMENT HANDLER
-        if (input.canMoveX()) {
-            board->moveBlock({ input.getArrowInput().x, 0 });
-            board->update(window);
-        }
-        if (input.canMoveY()) {
-            board->moveBlock({ 0, input.getArrowInput().y });
-            board->update(window);
-            
-        }
-
-
-
-        // ROTATION HANDLER
-        if (input.canRotate()) {
-            board->rotateBlock(input.getRotate());
-            board->update(window);
-
-        }
-
-        input.updateLastVals();
-
 
     }
     delete board;
