@@ -1,3 +1,13 @@
+/*
+* Class: Cpts 122
+* Professor: Andrew O'Fallon
+* Assignment: PA9
+* TA: Melvin Manning
+* Lab Section: 8
+* Due: 4/23/25
+* Programmers: Gavin Gaetos-Puzon, Logan Spinali
+* Description: Runs the game of Tertis (a legally distinct version of tetris)
+*/
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
@@ -9,6 +19,8 @@
 #include "inputhandler.hpp"
 
 #include "testcases/holdblocktest.hpp"
+#include "testcases/blockqueuetest.hpp"
+#include "testcases/scoringtest.hpp"
 
 using sf::Vector2f;
 using sf::Clock;
