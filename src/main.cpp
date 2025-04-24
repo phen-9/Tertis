@@ -1,3 +1,13 @@
+/*
+* Class: Cpts 122
+* Professor: Andrew O'Fallon
+* Assignment: PA9
+* TA: Melvin Manning
+* Lab Section: 8
+* Due: 4/23/25
+* Programmers: Gavin Gaetos-Puzon, Logan Spinali
+* Description: Runs the game of Tertis (a legally distinct version of tetris)
+*/
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
@@ -9,6 +19,12 @@
 #include "inputhandler.hpp"
 #include "mainmenu.hpp"
 
+<<<<<<< HEAD
+=======
+#include "testcases/holdblocktest.hpp"
+#include "testcases/blockqueuetest.hpp"
+#include "testcases/scoringtest.hpp"
+>>>>>>> 798b866d2b647afb30667a70246b47944bedea57
 
 using sf::Vector2f;
 using sf::Clock;
@@ -36,7 +52,7 @@ int main()
     MainMenu menu;
 
     sf::Music mus("../../../../assets/TertisTheme.ogg");
-    mus.setVolume(80);
+    mus.setVolume(60);
     mus.setLooping(true);
     mus.play();
 

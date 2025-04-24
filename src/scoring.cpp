@@ -9,7 +9,6 @@ Scoring::Scoring()
 	clear = sf::SoundBuffer("../../../../assets/lineclear.wav");
 	tertis = sf::SoundBuffer ("../../../../assets/tertisclear.wav");
 	audioman = new sf::Sound(clear);
-	audioman->setVolume(65);
 
 	saveData = std::fstream("../../../../src/savedata.txt", std::ios::in);
 	if (saveData.is_open()) {
@@ -33,6 +32,7 @@ Scoring::Scoring(const Scoring& ref)
 	this->currentScore = ref.currentScore;
 	this->highScore = ref.highScore;
 	saveData = std::fstream("../../../../src/savedata.txt", std::ios::in);
+	this->audioman = ref.audioman;
 
 }
 
@@ -45,24 +45,30 @@ Scoring::~Scoring()
 	delete audioman;
 }
 
-int Scoring::updateScore(int add)
+int Scoring::updateScore(int add, bool sound)
 {
-	currentScore += add;
-	if (currentScore > highScore) {
-		highScore = currentScore;
-	}
+	if (add >= 0) {
+		currentScore += add;
+		if (currentScore > highScore) {
+			highScore = currentScore;
+		}
 
-	sf::SoundBuffer buf;
+		sf::SoundBuffer buf;
 
-	if (add >= 4000) {
-		// play tertis sound
-		audioman->setBuffer(tertis);
-		audioman->play();
-	}
-	else if (add >= 0) {
-		// play normal clear sound
-		audioman->setBuffer(clear);
-		audioman->play();
+		if (sound) {
+			if (add >= 4000) {
+				// play tertis sound
+				audioman->setBuffer(tertis);
+				audioman->setVolume(75);
+				audioman->play();
+			}
+			else if (add >= 0) {
+				// play normal clear sound
+				audioman->setBuffer(clear);
+				audioman->setVolume(50);
+				audioman->play();
+			}
+		}
 	}
 
 	return currentScore;
@@ -76,6 +82,11 @@ int Scoring::getCurrentScore()
 int Scoring::getHighScore()
 {
 	return highScore;
+}
+
+void Scoring::setHighScore(int newScore)
+{
+	highScore = newScore;
 }
 
 void Scoring::resetScore()
