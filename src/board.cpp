@@ -24,6 +24,7 @@ Board::Board(Vector2f position) :
 
 		}
 	}
+	hasSwapped = false;
 }
 
 Board::~Board()
@@ -91,18 +92,22 @@ void Board::placeBlock()
 	lineClearCheck();
 	delete current;
 	setCurrent(queue.getBlock());
+	hasSwapped = false;
 }
 
 void Board::holdBlock() {
-	if (hold.getBlock() == nullptr) {
-		hold.setBlock(current);
-		setCurrent(queue.getBlock());
-	}
-	else {
-		Tetromino* temp = current->clone();
-		current = hold.getBlock()->clone();
-		hold.setBlock(temp);
-		current->setPosition({ 5,20 });
+	if (!hasSwapped) {
+		if (hold.getBlock() == nullptr) {
+			hold.setBlock(current);
+			setCurrent(queue.getBlock());
+		}
+		else {
+			Tetromino* temp = current->clone();
+			current = hold.getBlock()->clone();
+			hold.setBlock(temp);
+			current->setPosition({ 5,20 });
+		}
+		hasSwapped = true;
 	}
 }
 

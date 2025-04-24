@@ -1,5 +1,6 @@
 
 #include "holdblock.hpp"
+#include <iostream>
 
 Holdblock::Holdblock() : tex("../../../../assets/hold_bg.png"), sprite(tex),
 blockTex("../../../../assets/blank.png"), blockSprite(blockTex)
@@ -25,7 +26,8 @@ Tetromino* Holdblock::getBlock() {
 
 void Holdblock::setBlock(Tetromino* newBlock) {
 	block = newBlock->clone();
-	updateTexture(1);
+	updateTexture(block->getId());
+	std::cout << block->getId() << ", " << newBlock->getId() << "\n";
 }
 
 

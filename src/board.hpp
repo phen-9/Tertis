@@ -41,4 +41,5 @@ private:
 	Sprite sprite;
 	BlockQueue queue;
 	Holdblock hold;
+	bool hasSwapped;
 };

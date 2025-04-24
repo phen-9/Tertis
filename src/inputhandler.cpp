@@ -67,8 +67,24 @@ bool InputHandler::canMoveY() {
 }
 
 bool InputHandler::canRotate() {
+	//movement key pressed
 	int r = getRotate();
-	return r != 0 && lastRotate != r;
+	if (r != 0) {
+		//holding down button (button was pressed last loop, last initial press was long enough ago):
+		if (lastRotate == r) {
+			if (time.getElapsedTime() - lastRotatePress >= sf::seconds(0.4)) {
+				lastRotatePress = time.getElapsedTime();
+				return true;
+			}
+		}
+		//buton was not pressed last loop
+		else {
+			lastRotatePress = time.getElapsedTime();
+
+			return true;
+		}
+	}
+	return false;
 }
 
 int InputHandler::getRotate() {
@@ -83,14 +99,30 @@ int InputHandler::getRotate() {
 }
 
 bool InputHandler::canQuickDrop() {
+	//movement key pressed
 	bool q = getQuickDrop();
+	if (q) {
+		//holding down button (button was pressed last loop, last initial press was long enough ago):
+		if (lastQuickDrop) {
+			if (time.getElapsedTime() - lastQuickDropPress >= sf::seconds(0.4)) {
+				lastQuickDropPress = time.getElapsedTime();
+				return true;
+			}
+		}
+		//buton was not pressed last loop
+		else {
+			lastQuickDropPress = time.getElapsedTime();
 
-	return q && lastQuickDrop != q;
+			return true;
+		}
+	}
+	return false;
 }
-bool InputHandler::canHold() {
-	bool q = getQuickDrop();
 
-	return q && lastQuickDrop != q;
+bool InputHandler::canHold() {
+	bool h = getHold();
+
+	return h && lastQuickDrop != h;
 }
 
 bool InputHandler::getQuickDrop() {
@@ -98,7 +130,7 @@ bool InputHandler::getQuickDrop() {
 }
 
 bool InputHandler::getHold() {
-	return sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Left);
+	return sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::C);
 }
 
 void InputHandler::updateLastVals() {

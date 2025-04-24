@@ -18,6 +18,7 @@ public:
 
 	Vector2i* getPositions();
 	Color getColor();
+	virtual int getId();
 
 	virtual void rotate();
 	void orientationRight();
@@ -25,6 +26,7 @@ public:
 
 	bool isOccupying(Vector2i target);
 protected:
+	int id;
 	Vector2i center;
 	Vector2i* arr;
 	Color col;

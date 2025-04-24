@@ -18,6 +18,7 @@ Tetromino::Tetromino(const Tetromino& ref)
 	}
 	col = ref.col;
 	orientation = ref.orientation;
+	id = ref.id;
 }
 
 Tetromino::~Tetromino()
@@ -48,6 +49,10 @@ Vector2i* Tetromino::getPositions()
 Color Tetromino::getColor()
 {
 	return this->col;
+}
+
+int Tetromino::getId() {
+	return id;
 }
 
 void Tetromino::rotate()

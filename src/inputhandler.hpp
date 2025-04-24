@@ -25,6 +25,8 @@ private:
 	Clock time;
 	Time lastXMovePress;
 	Time lastYMovePress;
+	Time lastQuickDropPress;
+	Time lastRotatePress;
 	Vector2i lastArrowInput;
 	int lastRotate;
 	bool lastHold;

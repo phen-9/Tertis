@@ -11,6 +11,7 @@ SquareBlock::SquareBlock() {
 	arr[1] = { 1, 0 };
 	arr[2] = { 1, 1 };
 	col = sf::Color(255, 255, 0);
+	id = 0;
 }
 
 void SquareBlock::rotate()
@@ -36,6 +37,7 @@ LineBlock::LineBlock() {
 	arr[1] = { 0, -1 };
 	arr[2] = { 0, -2 };
 	col = sf::Color{ 62, 250, 255 };
+	id = 1;
 }
 
 void LineBlock::rotate()
@@ -71,6 +73,7 @@ LBlock::LBlock() {
 	arr[1] = { 0, -1 };
 	arr[2] = { 1, -1 };
 	col = sf::Color{ 255, 159, 0 };
+	id = 2;
 }
 
 void LBlock::rotate()
@@ -128,6 +131,7 @@ JBlock::JBlock() {
 	arr[1] = { 0, -1 };
 	arr[2] = { -1, -1 };
 	col = sf::Color{ 0, 62, 255 };
+	id = 3;
 }
 
 void JBlock::rotate()
@@ -184,6 +188,7 @@ TBlock::TBlock() {
 	arr[1] = { 1, 0 };
 	arr[2] = { 0, 1 };
 	col = sf::Color{ 197, 73, 255 };
+	id = 4;
 }
 
 void TBlock::rotate()
@@ -240,6 +245,7 @@ SBlock::SBlock() {
 	arr[1] = { 0, -1 };
 	arr[2] = { -1, -1 };
 	col = sf::Color{ 62, 255, 51 };
+	id = 5;
 }
 
 void SBlock::rotate()
@@ -278,6 +284,7 @@ ZBlock::ZBlock() {
 	arr[1] = { 0, -1 };
 	arr[2] = { 1, -1 };
 	col = sf::Color{ 255, 31, 31 };
+	id = 6;
 }
 
 void ZBlock::rotate()

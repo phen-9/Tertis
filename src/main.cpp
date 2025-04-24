@@ -68,20 +68,19 @@ int main()
 
         //HOLD BLOCK
         if (input.canHold()) {
+            board->holdBlock();
             board->update(window);
         }
         
         // MOVEMENT HANDLER
         if (input.canMoveX()) {
-            board->holdBlock();
-
             board->moveBlock({ input.getArrowInput().x, 0 });
             board->update(window);
         }
         if (input.canMoveY()) {
             board->moveBlock({ 0, input.getArrowInput().y });
             board->update(window);
- 
+            
         }
 
 
