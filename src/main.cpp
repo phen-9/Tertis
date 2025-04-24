@@ -51,6 +51,9 @@ int main()
     DeathScreen death;
 
     sf::Music mus("../../../../assets/TertisTheme.ogg");
+    sf::SoundBuffer buff("../../../../assets/death.mp3");
+    sf::Sound s(buff);
+    s.setVolume(80);
     mus.setVolume(60);
     mus.setLooping(true);
     mus.play();
@@ -100,6 +103,7 @@ int main()
                     if (ticksOnGround >= 3) {
                         board->update(window);
                         if (board->checkDeath()) {
+                            s.play();
                             state = 2;
                         }
                         board->placeBlock();
