@@ -13,7 +13,7 @@ private:
 ScoringTest::ScoringTest()
 {
 	tempscore.resetScore();
-	saveHighScore = tempScore.getHighScore();
+	saveHighScore = tempscore.getHighScore();
 }
 
 inline void ScoringTest::run()
@@ -22,21 +22,21 @@ inline void ScoringTest::run()
 	
 	int currentScore = tempscore.getCurrentScore();
 	// Tests to see if numbers are successfully added when add is called
-	if (currentScore + 500 != tempscore.add(500, false)) {
+	if (currentScore + 500 != tempscore.updateScore(500, false)) {
 		std::cout << "Test failed: score was not added\n";
 		hasfailed = true;
 	}
 	
 	currentScore = tempscore.getCurrentScore();
 	// Tests to see if negative numbers are blocked from being added
-	if (currentScore != tempscore.add(-500, false)) {
+	if (currentScore != tempscore.updateScore(-500, false)) {
 		std::cout << "Test failed: negative score was added\n";
 		hasfailed = true;
 	}
 
 	tempscore.setHighScore(5000);
 	tempscore.resetScore();
-	tempscore.add(10000, false);
+	tempscore.updateScore(10000, false);
 	// Tests to see if a current score > high score will result in the high score being set to the current score
 	if (tempscore.getHighScore() == 5000) {
 		std::cout << "Test failed: highscore was not overridden by a higher current score\n";
